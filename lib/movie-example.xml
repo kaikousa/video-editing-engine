@@ -31,7 +31,7 @@
             <mute>false</mute><!-- true/false -->
             <volume>100</volume><!-- in percentages(%) -->
         </visual>
-        <visual type="still" index="2">
+        <visual type="image" index="2">
             <file>tmp/export/1/streetview.png</file>
             <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
             <end-point>00:00:00:00</end-point>
@@ -43,8 +43,10 @@
     
     <visual-effects>
         <effect type="crossfade" start-point="00:00:00:00" end-point="00:00:00:00">
-            <param1>ss</param1>
-            <param2>dd</param2>
+            <!-- Parameters depend on the implementation of the effect, refer to documentation
+                 to know more about what parameters each effect accepts. -->
+            <param name="testParam1">100</param>
+            <param name ="testParam2">86</param>
         </effect>
     </visual-effects>
     
