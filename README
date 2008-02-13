@@ -1,3 +1,15 @@
-== RubyApplication1
+Video Rendering Engine
+----------------------
 
-You should document your project here.
+The intent of this project is to create a simple yet effective video compiler/
+exporter for web-based videoediting. It could also be used for other purposes
+if there's a need.
+
+TODO: Licensing
+TODO: Some documentation
+
+History
+-------
+
+02.2008 - The project begins as the video processing components are separeted
+from Fooga (www.fooga.org).
