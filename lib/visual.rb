@@ -20,9 +20,16 @@ class Visual
   end
   
   #Returns false if the visual has no audiotrack, is an image,
-  #the track is muted of the volume is 0.
+  #the track is muted or the volume is 0.
+  #ToDo: Check the audio from the real file(preferably with the aid of audiotools)
   def audio?
-    
+    unless @mute or @volume == 0 or @type == "image"
+      puts "has audio"
+      return true
+    else
+      puts "no audio"
+      return false
+    end
   end
   
   def to_str()
