@@ -69,8 +69,10 @@ class MovieBuilder
       type = e.attribute("type")
       properties = {}
       e.each_element_with_text() { |element| 
-        properties.merge!({ element.name => element.text }) #Add a new property to the existing properties
-        #puts "name: #{element.name} value: #{element.text}"  
+        name = element.attribute("name")
+        value = element.text
+        properties.merge!({ name => value }) #Add a new property to the existing properties
+        #puts "name: #{name} value: #{value}"  
       }       
       effect = Effect.new(type, properties)
       effects << effect #Push the new Effect to effects-array
@@ -78,7 +80,7 @@ class MovieBuilder
     @movie.effects = effects
     
     #visuals.each_element_with_text{|e| puts e} 
-    
+    return @movie
   end
   
 end
