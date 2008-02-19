@@ -12,7 +12,7 @@ class AudioTools
     
   end
   
-  def converAudio(audioFile)
+  def convertAudio(audioFile)
     
   end
   
