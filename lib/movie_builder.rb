@@ -7,6 +7,8 @@ require "rexml/document"
 include REXML
 require "movie"
 require "effect"
+require "observable"
+include Observable
 
 class MovieBuilder
   
@@ -19,6 +21,7 @@ class MovieBuilder
   #Builds the object model from the given xml-file
   #ToDo: Validate xml
   def buildMovie(xmlFile)
+    updateAll("Reading the object model from xml(#{xmlFile})...")
     xml = Document.new(File.open(xmlFile))
     
     name = XPath.first(xml, "//name").text
@@ -80,6 +83,7 @@ class MovieBuilder
     @movie.effects = effects
     
     #visuals.each_element_with_text{|e| puts e} 
+    updateAll("...object model finished!")
     return @movie
   end
   
