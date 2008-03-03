@@ -2,8 +2,8 @@
 #Author: Kai Kousa
 #Description: Movie is a wrapper class to hold audio- and videosequences
 #that compose a movie.
-require 'audio_sequence'
-require 'visual_sequence'
+require 'model/audio_sequence'
+require 'model/visual_sequence'
 
 class Movie
   

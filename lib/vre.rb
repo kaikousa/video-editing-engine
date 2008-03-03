@@ -1,6 +1,8 @@
+# Name: Vre
+# Author: Kai Kousa
+# Description: Main-class for rendering. This class parses the command-line 
+# parameters and delegates tasks to other classes
 # 
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
 require 'movie_builder'
 require "observer"
 include Observer
@@ -25,6 +27,6 @@ class Vre
   end
   
   def update(message)
-    puts message
+    puts "Builder: #{message}"
   end
 end

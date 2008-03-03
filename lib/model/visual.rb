@@ -2,7 +2,8 @@
 #Author: Kai Kousa
 #Description: Encapsulates data related to a visual element in the movie
 #(video, images)
- 
+require "splittable"
+include Splittable
 
 class Visual
   
@@ -29,6 +30,14 @@ class Visual
     else
       puts "no audio"
       return false
+    end
+  end
+  
+  def inRange?(splitPoint)
+    if splitPoint < @startPoint or splitPoint > endPoint
+      return false
+    else 
+      return true
     end
   end
   

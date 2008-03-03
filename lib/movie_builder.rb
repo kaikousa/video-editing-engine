@@ -5,8 +5,8 @@
 # audio and videosequences.
 require "rexml/document"
 include REXML
-require "movie"
-require "effect"
+require "model/movie"
+require "model/effect"
 require "observable"
 include Observable
 
