@@ -4,8 +4,8 @@
 # parameters and delegates tasks to other classes
 # 
 require 'movie_builder'
-require "observer"
-include Observer
+#require "observer"
+#include Observer
 
 class Vre
   def initialize
@@ -15,7 +15,7 @@ class Vre
   def main()
     builder = MovieBuilder.new
     builder.register(self)
-    builder.buildMovie('movie-example.xml')
+    builder.buildMovie('xml/movie-example.xml')
     movie = builder.movie
     
     puts "A movie model was generated. The details:"
