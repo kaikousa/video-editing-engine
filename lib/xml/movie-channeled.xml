@@ -82,10 +82,15 @@
             </audio>      
             <audio>
                 <file>tmp/export/1/someOtherMusic.mp3</file>
-                <volume>100</volume><!-- In percentages(%) -->
                 <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
                 <end-point>00:00:00:00</end-point><!-- Same as the start-point -->
-                <offset>00:00:00:00</offset><!-- h:m:s:ms -->            
+                <offset>00:00:00:00</offset><!-- h:m:s:ms --> 
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>
+                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
+                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
+                </volumepoints>
             </audio>
         </channel>
     </audio-channels>
