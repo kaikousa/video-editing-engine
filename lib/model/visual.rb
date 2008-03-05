@@ -7,16 +7,17 @@ include Splittable
 
 class Visual
   
-  attr_reader(:type, :file, :startPoint, :endPoint, :place, :mute, :volumePoints)
+  attr_reader(:type, :file, :startPoint, :endPoint, :place, :mute, :volumePoints, :effects)
   
-  def initialize(type, file, startPoint, endPoint, place, mute, volumePoints)
+  def initialize(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
     @type = type
     @file = file
     @startPoint = startPoint
     @endPoint = endPoint
     @place = place
     @mute = mute
-    @volumePoints = volumePoints    
+    @volumePoints = volumePoints  
+    @effects = effects
   end
   
   #Returns false if the visual has no audiotrack, is an image,
@@ -31,6 +32,10 @@ class Visual
       puts "no audio"
       return false
     end
+  end
+  
+  def effects=(effects)
+    @effects = effects
   end
   
   def inRange?(splitPoint)
