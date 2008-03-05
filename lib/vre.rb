@@ -12,10 +12,10 @@ class Vre
     
   end
   
-  def main()
+  def main(xmlFile)
     builder = MovieBuilder.new
     builder.register(self)
-    builder.buildMovie('xml/movie-example.xml')
+    builder.buildMovie(xmlFile)
     movie = builder.movie
     
     puts "A movie model was generated. The details:"
