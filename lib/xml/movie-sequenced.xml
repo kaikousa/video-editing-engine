@@ -30,11 +30,11 @@
             </volumepoints>
                 
             <effects>
-                <effect name="" start="00:00:00:00" end="00:00:00:00">
+                <effect name="" startPoint="00:00:00:00" endPoint="00:00:00:00">
                     <param name="crossfade" value="" />
                 </effect>
                     
-                <effect name="" start="00:00:00:00" end="00:00:00:00">
+                <effect name="" startPoint="00:00:00:00" endPoint="00:00:00:00">
                     <param name="crossfade" value="" />
                 </effect>
             </effects>
