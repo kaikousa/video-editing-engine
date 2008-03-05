@@ -15,7 +15,6 @@ class SequencedBuilder
   end
   
   def buildMovie(xml, movie)
-    effects = []
     #Parse a visual sequence from xml
     visualSequence = VisualSequence.new
     XPath.each(xml, "/movie/sequence/visual"){ |e| 
@@ -34,10 +33,8 @@ class SequencedBuilder
         volumePoints.merge!({point => value})
       }
       
-      visual = Visual.new(type, file, startPoint, endPoint, place, mute, volumePoints)
-      visualSequence.addVideo(visual)      
-      
       #parse effects
+      effects = []
       visualEffects = XPath.first(e, "effects")
       visualEffects.each_element_with_text(){|element|
         name = element.attribute("name")
@@ -53,9 +50,11 @@ class SequencedBuilder
         effects << effect
       }
       
+      visual = Visual.new(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
+      visualSequence.addVideo(visual) 
+      
     }
     movie.visualSequence=(visualSequence)
-    movie.effects=(effects)
     
     #Parse audio sequence from xml
     audioSequence = AudioSequence.new
