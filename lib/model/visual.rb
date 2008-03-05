@@ -7,24 +7,24 @@ include Splittable
 
 class Visual
   
-  attr_reader(:index, :type, :file, :startPoint, :endPoint, :place, :mute, :volume)
+  attr_reader(:type, :file, :startPoint, :endPoint, :place, :mute, :volumePoints)
   
-  def initialize(index, type, file, startPoint, endPoint, place, mute, volume)
-    @index = index
+  def initialize(type, file, startPoint, endPoint, place, mute, volumePoints)
     @type = type
     @file = file
     @startPoint = startPoint
     @endPoint = endPoint
     @place = place
     @mute = mute
-    @volume = volume    
+    @volumePoints = volumePoints    
   end
   
   #Returns false if the visual has no audiotrack, is an image,
   #the track is muted or the volume is 0.
   #ToDo: Check the audio from the real file(preferably with the aid of audiotools)
   def audio?
-    unless @mute or @volume == 0 or @type == "image"
+    #or @volume == 0
+    unless @mute or @type == "image"
       puts "has audio"
       return true
     else
@@ -42,7 +42,7 @@ class Visual
   end
   
   def to_str()
-    "Index: #{@index} Type: #{@type} File: #{@file} StartPoint: #{@startPoint} EndPoint: #{@endPoint} Mute: #{@mute} Volume: #{@volume}"
+    "Type: #{@type} File: #{@file} StartPoint: #{@startPoint} EndPoint: #{@endPoint} Mute: #{@mute} Volume: #{@volumePoints}"
   end
   
 end

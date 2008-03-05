@@ -6,10 +6,12 @@
 
 class Effect
   
-  attr_reader(:type, :properties)
+  attr_reader(:name, :properties)
   
-  def initialize(type, properties)
-    @type = type
+  def initialize(name, startPoint, endPoint, properties)
+    @name = name
+    @startPoint = startPoint
+    @endPoint = endPoint
     @properties = properties
   end
   
