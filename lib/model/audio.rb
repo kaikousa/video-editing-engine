@@ -5,14 +5,15 @@
 
 class Audio
   
-  attr_reader :file, :volume, :startPoint, :endPoint, :offset 
+  attr_reader(:file, :volume, :startPoint, :endPoint, :offset, :volumePoints)
   
-  def initialize(file, volume, startPoint, endPoint, offset)
+  def initialize(file, volume, startPoint, endPoint, offset, volumePoints)
     @file = file
     @volume = volume
     @startPoint = startPoint
     @endPoint = endPoint
-    @offset = offset    
+    @offset = offset   
+    @volumePoints = volumePoints
   end
   
   def to_str()
