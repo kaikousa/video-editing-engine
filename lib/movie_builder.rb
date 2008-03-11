@@ -23,7 +23,7 @@ class MovieBuilder
   #Builds the object model from the given xml-file
   #ToDo: Validate xml
   def buildMovie(xmlFile)
-    updateAll("Reading the object model from xml(#{xmlFile})...")
+    updateAll("MovieBuilder", "Reading the object model from xml(#{xmlFile})...")
     xml = Document.new(File.open(xmlFile))
     
     e = XPath.first(xml, "movie")
@@ -39,19 +39,37 @@ class MovieBuilder
     @movie = Movie.new(name, format, resolution)
     
     if(timelineFormat == "channeled")
-      updateAll("Building an object model from channeled timeline-format...")
+      updateAll("MovieBuilder", "Building an object model from channeled timeline-format...")
       channeledBuilder = ChanneledBuilder.new
       @movie = channeledBuilder.buildMovie(xml, @movie)
     elsif(timelineFormat == "sequenced")
-      updateAll("Building an object model from sequenced timeline-format...")
+      updateAll("MovieBuilder", "Building an object model from sequenced timeline-format...")
       sequencedBuilder = SequencedBuilder.new
       @movie = sequencedBuilder.buildMovie(xml, @movie)
     else
-      updateAll("Unknown timeline-format(#{timelineFormat})")
+      updateAll("MovieBuilder", "Unknown timeline-format(#{timelineFormat})")
     end
     
-    updateAll("...object model finished!")
+    updateAll("MovieBuilder", "...object model finished!")
+    
+    updateAll("MovieBuilder", "Beginning normalization...")
+    normalize()
+    updateAll("MovieBuilder", "Normalization finished!")
+    
     return @movie
+  end
+  
+  def normalize()
+    #Create Audio-objects from Visuals that have audiotracks
+    for visual in @movie.visualSequence.visuals
+      if visual.audio?
+        audio = Audio.new(visual.file, visual.startPoint.timeCodeStr, visual.endPoint.timeCodeStr, visual.place.timeCodeStr, visual.volumePoints)
+        @movie.audioSequence.addAudio(audio)
+      end
+    end
+    
+    #Determine gaps in the project and place black images instead
+
   end
   
 end
