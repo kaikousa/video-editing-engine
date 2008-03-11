@@ -1,4 +1,4 @@
-require '../lib/visual'
+require '../lib/model/visual'
 require 'test/unit'
  
 class TestVisual < Test::Unit::TestCase
