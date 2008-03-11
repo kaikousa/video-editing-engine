@@ -7,6 +7,7 @@ require "rexml/document"
 include REXML
 require "model/movie"
 require "model/effect"
+require "model/volume_point"
 require "observable"
 include Observable
 
@@ -30,11 +31,11 @@ class ChanneledBuilder
         mute = XPath.first(e, "mute").text
       
         volume = XPath.first(e, "volumepoints")
-        volumePoints = {}
+        volumePoints = []
         volume.each_element_with_text(){|element|
           point = element.attribute("point")
           value = element.text
-          volumePoints.merge!({point => value})
+          volumePoints << VolumePoint.new(value, point)
         }
         #parse effects
         effects = []
@@ -72,14 +73,14 @@ class ChanneledBuilder
         offset = XPath.first(e, "offset").text
       
         volume = XPath.first(e, "volumepoints")
-        volumePoints = {}
+        volumePoints = []
         volume.each_element_with_text(){|element|
           point = element.attribute("point")
           value = element.text
-          volumePoints.merge!({point => value})
+          volumePoints << VolumePoint.new(value, point)
         }
       
-        audio = Audio.new(file, volume, startPoint, endPoint, offset, volumePoints)
+        audio = Audio.new(file, startPoint, endPoint, offset, volumePoints)
         audioSequence.addAudio(audio)       
       }
       
