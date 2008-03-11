@@ -1,18 +1,17 @@
-#Name: Movie
+#Name: Audio
 #Author: Kai Kousa
 #Description: Encapsulates all audio related data
- 
+require "tools/time_code"
 
 class Audio
   
-  attr_reader(:file, :volume, :startPoint, :endPoint, :offset, :volumePoints)
+  attr_reader(:file, :startPoint, :endPoint, :offset, :volumePoints)
   
-  def initialize(file, volume, startPoint, endPoint, offset, volumePoints)
+  def initialize(file, startPoint, endPoint, offset, volumePoints)
     @file = file
-    @volume = volume
-    @startPoint = startPoint
-    @endPoint = endPoint
-    @offset = offset   
+    @startPoint = TimeCode.new(startPoint)
+    @endPoint = TimeCode.new(endPoint)
+    @offset = TimeCode.new(offset   )
     @volumePoints = volumePoints
   end
   
