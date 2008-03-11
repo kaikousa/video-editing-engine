@@ -12,8 +12,8 @@ class Visual
   def initialize(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
     @type = type
     @file = file
-    @startPoint = startPoint
-    @endPoint = endPoint
+    @startPoint = TimeCode.new(startPoint)
+    @endPoint = TimeCode.new(endPoint)
     @place = place
     @mute = mute
     @volumePoints = volumePoints  
@@ -38,8 +38,9 @@ class Visual
     @effects = effects
   end
   
-  def inRange?(splitPoint)
-    if splitPoint < @startPoint or splitPoint > endPoint
+  def inRange?(point)
+    point = TimeCode.new(point)
+    if point.convertToMs() < @startPoint.convertToMs() or point.convertToMs() > @endPoint.convertToMs()
       return false
     else 
       return true
