@@ -8,7 +8,7 @@ class TestTimeCode < Test::Unit::TestCase
   
   def testConvertToMs
     time = TimeCode.new("03:04:20:30")
-    assert_equal(11060030, time.convertToMs())
+    assert_equal(11060030, time.milliseconds)
   end
   
 end
