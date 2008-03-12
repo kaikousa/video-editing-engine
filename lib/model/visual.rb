@@ -63,6 +63,12 @@ class Visual
     end
   end
   
+  def effects=(effects)
+    @effects = effects
+  end
+  
+
+
   #point = point on the timeline (in milliseconds)
   def inRange?(point)
     #point = TimeCode.new(point)
