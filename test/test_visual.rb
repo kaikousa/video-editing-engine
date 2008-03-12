@@ -2,8 +2,17 @@ require '../lib/model/visual'
 require 'test/unit'
  
 class TestVisual < Test::Unit::TestCase
+  
+  def getDefaultVisual
+    volumePoints = []
+    volumePoints << VolumePoint.new(100, "00:00:00:00")
+    volumePoints << VolumePoint.new(100, "00:00:10:00")
+    visual = Visual.new("video", "", "00:00:00:00", "00:00:10:00", "00:00:00:00", false, volumePoints, [])
+    return visual
+  end
+  
   def testAudioMute
-    visual = Visual.new(1, "video", "", 0, 0, 1, true, 100)
+    visual = Visual.new("video", "", "00:00:00:00", "00:00:00:00", 1, true, 100)
     assert_equal(false, visual.audio?)
   end
   
