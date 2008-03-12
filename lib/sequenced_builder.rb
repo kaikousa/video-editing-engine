@@ -26,28 +26,28 @@ class SequencedBuilder
       place = XPath.first(e, "place").text
       mute = XPath.first(e, "mute").text
       
-      volume = XPath.first(e, "volumepoints")
       volumePoints = []
-      volume.each_element_with_text(){|element|
-        point = element.attribute("point")
-        value = element.text
-        volumePoints << VolumePoint.new(value, point)
-      }
+        
+      XPath.each(e, "volumepoints/volumepoint"){|volPoint|
+        point = XPath.first(volPoint, "point").text
+        volume = XPath.first(volPoint, "volume").text
+        volumePoints << VolumePoint.new(volume, point)
+     }
       
       #parse effects
       effects = []
       visualEffects = XPath.first(e, "effects")
       visualEffects.each_element_with_text(){|element|
         name = element.attribute("name")
-        startPoint = element.attribute("startPoint")
-        endPoint = element.attribute("endPoint")
+        effectStartPoint = element.attribute("startPoint").to_s
+        effectEndPoint = element.attribute("endPoint").to_s
         parameters = {}
         element.each_element_with_text(){|param|
           paramName = param.attribute("name")
           paramValue = param.text
           parameters.merge!({paramName => paramValue})
         }
-        effect = Effect.new(name, startPoint, endPoint, parameters)
+        effect = Effect.new(name, effectStartPoint, effectEndPoint, parameters)
         effects << effect
       }
       
@@ -63,17 +63,17 @@ class SequencedBuilder
       file = XPath.first(e, "file").text
       startPoint = XPath.first(e, "start-point").text
       endPoint = XPath.first(e, "end-point").text
-      offset = XPath.first(e, "offset").text
+      place = XPath.first(e, "place").text
       
-      volume = XPath.first(e, "volumepoints")
       volumePoints = []
-      volume.each_element_with_text(){|element|
-        point = element.attribute("point")
-        value = element.text
-        volumePoints << VolumePoint.new(value, point)
+        
+      XPath.each(e, "volumepoints/volumepoint"){|volPoint|
+        point = XPath.first(volPoint, "point").text
+        volume = XPath.first(volPoint, "volume").text
+        volumePoints << VolumePoint.new(volume, point)
       }
       
-      audio = Audio.new(file, startPoint, endPoint, offset, volumePoints)
+      audio = Audio.new(file, startPoint, endPoint, place, volumePoints)
       #puts audio.to_str
       audioSequence.addAudio(audio)      
     }
