@@ -27,9 +27,15 @@
                 <mute>false</mute><!-- true/false -->
                 
                 <!-- By default, this should contain the start- and endpoints -->
-                <volumepoints>
-                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:04:500">100</volume><!-- In percentages(%) -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:04:500</point>
+                    </volumepoint>                    
                 </volumepoints>
                 
                 <effects>
@@ -47,8 +53,14 @@
                 
                 <!-- By default, this should contain the start- and endpoints -->
                 <volumepoints>
-                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:06:00">100</volume><!-- In percentages(%) -->
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:06:00</point>
+                    </volumepoint>
                 </volumepoints>
                 <effects>
                     
@@ -66,9 +78,15 @@
                 <mute>false</mute><!-- true/false -->
                 
                 <!-- By default, this should contain the start- and endpoints -->
-                <volumepoints>
-                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:06:00">100</volume><!-- In percentages(%) -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:06:00</point>
+                    </volumepoint>                    
                 </volumepoints>
                 <effects>
                     
@@ -83,9 +101,15 @@
                 <mute>false</mute><!-- true/false -->
                 
                 <!-- By default, this should contain the start- and endpoints -->
-                <volumepoints>
-                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:05:00">100</volume><!-- In percentages(%) -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:05:00</point>
+                    </volumepoint> 
                 </volumepoints>
                 <effects>
                     
@@ -101,15 +125,42 @@
                 <file>nil</file>
                 <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
                 <end-point>00:00:09:00</end-point><!-- Same as the start-point -->
-                <offset>00:00:01:500</offset><!-- h:m:s:ms --> 
+                <place>00:00:01:500</place><!-- h:m:s:ms --> 
                 
                 <!-- By default, this should contain the start- and endpoints -->
-                <volumepoints>
-                    <volume point="00:00:00:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:07:00">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:10:500">0</volume><!-- In percentages(%) -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:07:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>0</volume>
+                        <point>00:00:10:500</point>
+                    </volumepoint>                    
                 </volumepoints>
-            </audio>            
+            </audio>        
+            <audio>
+                <file>nil</file>
+                <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <end-point>00:00:05:00</end-point><!-- Same as the start-point -->
+                <place>00:00:21:00</place><!-- h:m:s:ms --> 
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:05:00</point>
+                    </volumepoint>                    
+                </volumepoints>
+            </audio>
         </channel>
         
         <channel id="Audio2">
@@ -117,13 +168,22 @@
                 <file>nil</file>
                 <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
                 <end-point>00:00:12:00</end-point><!-- Same as the start-point -->
-                <offset>00:00:07:00</offset><!-- h:m:s:ms --> 
+                <place>00:00:07:00</place><!-- h:m:s:ms --> 
                 
                 <!-- By default, this should contain the start- and endpoints -->
                 <volumepoints>
-                    <volume point="00:00:00:00">0</volume><!-- In percentages(%) -->
-                    <volume point="00:00:10:500">100</volume><!-- In percentages(%) -->
-                    <volume point="00:00:12:00">100</volume><!-- In percentages(%) -->
+                    <volumepoint>
+                        <volume>0</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:10:500</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:12:00</point>
+                    </volumepoint> 
                 </volumepoints>
             </audio>
         </channel>
