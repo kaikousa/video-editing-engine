@@ -15,6 +15,10 @@ class VisualSequence
     @visuals << visual
   end
   
+  def visuals=(visuals)
+    @visuals = visuals
+  end
+  
   def to_str()
     text = "VisualSequence: \n"
     @visuals.each{|visual| text + visual.to_str}
