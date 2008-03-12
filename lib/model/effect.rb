@@ -2,7 +2,7 @@
 #Author: Kai Kousa
 #Description: Encapsulates data that the effects processor needs to know
 #in order to apply the effect.
- 
+require "tools/time_code"
 
 class Effect
   
@@ -10,8 +10,8 @@ class Effect
   
   def initialize(name, startPoint, endPoint, properties)
     @name = name
-    @startPoint = startPoint
-    @endPoint = endPoint
+    @startPoint = TimeCode.new(startPoint)
+    @endPoint = TimeCode.new(endPoint)
     @properties = properties
   end
   
