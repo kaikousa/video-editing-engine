@@ -6,10 +6,11 @@
 
 class TimeCode
   
-  attr_reader(:timeCodeStr)
+  attr_reader(:timeCodeStr, :milliseconds)
   
   def initialize(timeCodeStr)
     @timeCodeStr = timeCodeStr
+    @milliseconds = convertToMs()
   end
   
   #Converts string-formatted time code to milliseconds
@@ -29,4 +30,20 @@ class TimeCode
     
     return milliseconds
   end
+  
+  def milliseconds=(millis)
+    @milliseconds = millis
+    @timeCodeStr = "00:00:00:" + @milliseconds.to_s #Change this to actual representation
+  end
+  
+  def to_s
+    @timeCodeStr
+  end
+  
+  def to_str
+    to_s()
+  end
+  
+  private :convertToMs
+  
 end
