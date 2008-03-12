@@ -5,8 +5,9 @@
     Created on : March 4, 2008, 10:48 AM
     Author     : Kai Kousa
     Description: This movie contains several cases that the engine has to 
-    overcome. If this project is rendered correctly, then the engine is working.
-    ToDo: More test cases. At the moment only the simplest cases are defined.
+    overcome to reach the status of milestone 1. If this project is rendered 
+    correctly, then the engine is working.ToDo: More test cases. 
+    At the moment only the simplest cases are defined.
         
 -->
 <movie version="1" type="channeled">
