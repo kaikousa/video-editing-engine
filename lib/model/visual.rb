@@ -14,10 +14,39 @@ class Visual
     @file = file
     @startPoint = TimeCode.new(startPoint)
     @endPoint = TimeCode.new(endPoint)
-    @place = place
+    @place = TimeCode.new(place)
     @mute = mute
     @volumePoints = volumePoints  
     @effects = effects
+  end
+  
+  def startPoint=(startPoint)
+    @startPoint = startPoint
+  end
+  
+  def endPoint=(endPoint)
+    @endPoint = endPoint
+  end
+  
+  def place=(place)
+    @place = place
+  end
+  
+  def mute=(mute)
+    @mute = mute
+  end
+  
+  def volumePoints=(volumePoints)
+    @volumePoints = volumePoints
+  end
+  
+  def effects=(effects)
+    @effects = effects
+  end  
+  
+  #Returns the length of the clip (endpoint - startpoint)
+  def length()
+    return (@endPoint.milliseconds - @startPoint.milliseconds)
   end
   
   #Returns false if the visual has no audiotrack, is an image,
@@ -26,23 +55,22 @@ class Visual
   def audio?
     #or @volume == 0
     unless @mute or @type == "image"
-      puts "has audio"
+      #puts "has audio"
       return true
     else
-      puts "no audio"
+      #puts "no audio"
       return false
     end
   end
   
-  def effects=(effects)
-    @effects = effects
-  end
-  
+  #point = point on the timeline (in milliseconds)
   def inRange?(point)
-    point = TimeCode.new(point)
-    if point.convertToMs() < @startPoint.convertToMs() or point.convertToMs() > @endPoint.convertToMs()
+    #point = TimeCode.new(point)
+    if point < @place.milliseconds
       return false
-    else 
+    elsif  point > (@place.milliseconds + @endPoint.milliseconds)
+      return false
+    else      
       return true
     end
   end
