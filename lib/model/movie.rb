@@ -30,6 +30,19 @@ class Movie
     @effects = effects
   end
   
+  def audioLongerThanVideo?()
+    sortedVisuals = @visualSequence.sort
+    
+    sortedAudios = @audioSequence.sort
+    lastAudio = sortedAudios[sortedAudios.length - 1]
+    lastVisual = sortedVisuals[sortedVisuals.length - 1]
+    if (lastAudio.place.milliseconds + lastAudio.length) > (lastVisual.place.milliseconds + lastVisual.length)
+      return true
+    else
+      return false
+    end
+  end
+  
   def to_str()
     "\nName: #{@name}\nFormat: #{@format}\nResolution: #{@resolution}\n\n"
   end
