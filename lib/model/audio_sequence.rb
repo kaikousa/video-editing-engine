@@ -14,5 +14,9 @@ class AudioSequence
   def addAudio(audio)
     @audios << audio
   end
+  
+  def sort
+    @audios.sort{|x, y| x.place.milliseconds <=> y.place.milliseconds}
+  end
 
 end

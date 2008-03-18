@@ -19,6 +19,10 @@ class VisualSequence
     @visuals = visuals
   end
   
+  def sort
+    @visuals.sort{|x, y| x.place.milliseconds <=> y.place.milliseconds}
+  end
+  
   def to_str()
     text = "VisualSequence: \n"
     @visuals.each{|visual| text + visual.to_str}
