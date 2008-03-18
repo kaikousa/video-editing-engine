@@ -2,8 +2,8 @@
 #Author: Kai Kousa
 #Description: Encapsulates data related to a visual element in the movie
 #(video, images)
-require "splittable"
-include Splittable
+#require "splittable"
+#include Splittable
 
 class Visual
   
@@ -49,25 +49,24 @@ class Visual
     return (@endPoint.milliseconds - @startPoint.milliseconds)
   end
   
+  def timelineEndPoint()
+    return (@place + TimeCode.new(length()))
+  end
+  
   #Returns false if the visual has no audiotrack, is an image,
   #the track is muted or the volume is 0.
   #ToDo: Check the audio from the real file(preferably with the aid of audiotools)
+  #ToDo: Check the levels of VolumePoints
   def audio?
     #or @volume == 0
-    unless @mute or @type == "image"
-      #puts "has audio"
-      return true
-    else
+    if @mute or @type == "image"
       #puts "no audio"
       return false
+    else
+      #puts "has audio"
+      return true
     end
   end
-  
-  def effects=(effects)
-    @effects = effects
-  end
-  
-
 
   #point = point on the timeline (in milliseconds)
   def inRange?(point)
