@@ -29,6 +29,11 @@ class ChanneledBuilder
         endPoint = XPath.first(e, "clip-end").text
         place = XPath.first(e, "place").text
         mute = XPath.first(e, "mute").text
+        if(mute == "true")
+          mute = true
+        elsif(mute == "false")
+          mute = false
+        end
       
         volumePoints = []
         
