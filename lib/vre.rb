@@ -5,6 +5,7 @@
 # 
 require 'movie_builder'
 require 'movie_renderer'
+require 'movie_normalizer'
 
 class Vre
   def initialize
@@ -16,6 +17,12 @@ class Vre
     builder.register(self)
     builder.buildMovie(xmlFile)
     movie = builder.movie
+    
+    normalizer = MovieNormalizer.new
+    normalizer.register(self)
+    puts "Begin normalization..."
+    movie = normalizer.normalize(movie)
+    puts "... normalization finished!"
             
     puts "A movie model was generated. The details:"
     puts movie.to_str
