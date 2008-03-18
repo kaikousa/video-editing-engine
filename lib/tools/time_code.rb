@@ -8,9 +8,16 @@ class TimeCode
   
   attr_reader(:timeCodeStr, :milliseconds)
   
-  def initialize(timeCodeStr)
-    @timeCodeStr = timeCodeStr
-    @milliseconds = convertToMs()
+  def initialize(timeCode)
+    if timeCode.instance_of?(String)
+      self.timeCodeStr=(timeCode)
+    elsif timeCode.instance_of?(Fixnum)
+      self.milliseconds=(timeCode)
+    elsif timeCode.instance_of?(Integer)
+      self.milliseconds=(timeCode)
+    elsif timeCode.instance_of?(TimeCode)
+      self.milliseconds=(timeCode.milliseconds)
+    end
   end
   
   #Converts string-formatted time code to milliseconds
@@ -30,10 +37,35 @@ class TimeCode
     
     return milliseconds
   end
+  private :convertToMs
   
-  def milliseconds=(millis)
-    @milliseconds = millis
-    @timeCodeStr = "00:00:00:" + @milliseconds.to_s #Change this to actual representation
+  #Return this TimeCode in milliseconds
+  def milliseconds=(ms)
+    @milliseconds = ms
+
+    hours = ms / 3600000 #1 hour == 3 600 000 ms
+    ms = ms - (hours * 3600000) 
+    minutes = ms / 60000 #1 minute == 60 000 ms
+    ms = ms - (minutes * 60000)
+    seconds = ms / 1000 #1 second == 1000 ms
+    ms = ms - (seconds * 1000)
+    @timeCodeStr = "#{hours}:#{minutes}:#{seconds}:#{ms}"
+  end
+  
+  #Return the String representation of this TimeCode(h:min:sec:ms)
+  def timeCodeStr=(str)
+    @timeCodeStr = str
+    @milliseconds = convertToMs()
+  end
+  
+  #Add the value of another TimeCode to this and return the result
+  def +(other)
+    TimeCode.new(@milliseconds + other.milliseconds)
+  end
+  
+  #Remove the value of another TimeCode from this and return the result
+  def -(other)
+    TimeCode.new(@milliseconds - other.milliseconds)
   end
   
   def to_s
@@ -43,7 +75,5 @@ class TimeCode
   def to_str
     to_s()
   end
-  
-  private :convertToMs
   
 end
