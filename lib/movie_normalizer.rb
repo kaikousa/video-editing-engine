@@ -1,6 +1,6 @@
-# 
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
+#Name: MovieNormalizer
+#Author: Kai Kousa
+#Description: Contains all methods needed for the normalization of a videoproject.
 require "observable"
 include Observable
 
