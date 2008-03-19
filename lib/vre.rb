@@ -24,12 +24,14 @@ class Vre
     movie = normalizer.normalize(movie)
     puts "... normalization finished!"
             
-    puts "A movie model was generated. The details:"
-    puts movie.to_str
-    puts "Contains:"
-    puts "Visuals: #{movie.visualSequence.visuals.length}" 
-    puts "Audios: #{movie.audioSequence.audios.length}"
-    puts "Effects: #{movie.effects.length}"
+    puts "\nA movie model was generated. The details:"
+    puts "\n\tName: #{movie.name}" 
+    puts "\tFormat: #{movie.format}"
+    puts "\tResolution: #{movie.resolution}"
+    puts "\n\tContains:"
+    puts "\tVisuals: #{movie.visualSequence.visuals.length}" 
+    puts "\tAudios: #{movie.audioSequence.audios.length}"
+    puts "\tEffects: #{movie.effects.length}"
     
     puts "\nProceeding to rendering process..."
     
