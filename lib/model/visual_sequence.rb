@@ -1,6 +1,6 @@
-# 
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
+# Name: VisualSequence
+# Author: Kai Kousa
+# Description: Encapsulates a collection of visuals and provides useful methods.
 require 'model/visual'
 
 class VisualSequence
@@ -9,18 +9,26 @@ class VisualSequence
   
   def initialize()
     @visuals = []
+    @sorted = false
   end
   
   def addVideo(visual)
     @visuals << visual
+    @sorted = false
   end
   
   def visuals=(visuals)
     @visuals = visuals
+    @sorted = false
   end
   
   def sort
-    @visuals.sort{|x, y| x.place.milliseconds <=> y.place.milliseconds}
+    #if the sequence hasn't changed since last sort, do not sort again
+    unless @sorted
+      @visuals = @visuals.sort{|x, y| x.place.milliseconds <=> y.place.milliseconds}
+      @sorted = true
+    end    
+    @visuals
   end
   
   def to_str()
