@@ -2,8 +2,8 @@ Video Rendering Engine
 ----------------------
 
 The intent of this project is to create a simple yet effective video compiler/
-exporter for web-based videoediting. It could also be used for other purposes
-if there's a need.
+exporter for web-based videoediting. It could also be used as a simple back-end
+for format conversions.
 
 TODO: Licensing
 TODO: Some documentation
