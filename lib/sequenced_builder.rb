@@ -1,6 +1,7 @@
 #Name: SequencedBuilder 
 #Author: Kai Kousa
-#Description:
+#Description: Builds a movie from xml-format that has every element mixed
+#in the same sequence.
 
 require "rexml/document"
 include REXML
