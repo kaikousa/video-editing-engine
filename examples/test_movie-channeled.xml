@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : movie-channeled.xml
+    Created on : March 4, 2008, 10:48 AM
+    Author     : Kai Kousa
+    Description: This movie contains several cases that the engine has to 
+    overcome to reach the status of milestone 1. If this project is rendered 
+    correctly, then the engine is working.ToDo: More test cases. 
+    At the moment only the simplest cases are defined.
+        
+-->
+<movie version="1" type="channeled">
+    <metadata>
+        <name>Test movie</name>
+        <format>mp4</format><!-- mp4, MPEG-2, Xvid -->
+        <resolution>720x576</resolution><!-- 720x576, 640x480, 320x240 -->
+    </metadata>    
+    
+    <video-channels>
+        <channel id="A">
+            
+            <visual type="video">
+                <file>nil</file>
+                <place>00:00:00:00</place><!-- position on the timeline -->
+                <clip-start>00:00:00:00</clip-start><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <clip-end>00:00:04:500</clip-end>
+                <mute>false</mute><!-- true/false -->
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:04:500</point>
+                    </volumepoint>                    
+                </volumepoints>
+                
+                <effects>
+
+                </effects>
+                
+             </visual>
+             
+            <visual type="video">
+                <file>nil</file>
+                <place>00:00:11:00</place><!-- position on the timeline -->
+                <clip-start>00:00:00:00</clip-start><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <clip-end>00:00:06:00</clip-end>
+                <mute>false</mute><!-- true/false -->
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:06:00</point>
+                    </volumepoint>
+                </volumepoints>
+                <effects>
+                    
+                </effects>
+            </visual>
+            
+        </channel>
+        
+        <channel id="B">
+            <visual type="video">
+                <file>nil</file>
+                <place>00:00:03:00</place><!-- position on the timeline -->
+                <clip-start>00:00:00:00</clip-start><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <clip-end>00:00:06:00</clip-end>
+                <mute>false</mute><!-- true/false -->
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint>
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:06:00</point>
+                    </volumepoint>                    
+                </volumepoints>
+                <effects>
+                    
+                </effects>
+            </visual>
+            
+            <visual type="video">
+                <file>nil</file>
+                <place>00:00:17:00</place><!-- position on the timeline -->
+                <clip-start>00:00:00:00</clip-start><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <clip-end>00:00:05:00</clip-end>
+                <mute>false</mute><!-- true/false -->
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:05:00</point>
+                    </volumepoint> 
+                </volumepoints>
+                <effects>
+                    
+                </effects>
+            </visual>
+            
+        </channel>
+    </video-channels>
+    
+    <audio-channels>
+        <channel id="Audio1">
+            <audio>
+                <file>nil</file>
+                <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <end-point>00:00:09:00</end-point><!-- Same as the start-point -->
+                <place>00:00:01:500</place><!-- h:m:s:ms --> 
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:07:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>0</volume>
+                        <point>00:00:10:500</point>
+                    </volumepoint>                    
+                </volumepoints>
+            </audio>        
+            <audio>
+                <file>nil</file>
+                <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <end-point>00:00:05:00</end-point><!-- Same as the start-point -->
+                <place>00:00:21:00</place><!-- h:m:s:ms --> 
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>                    
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:05:00</point>
+                    </volumepoint>                    
+                </volumepoints>
+            </audio>
+        </channel>
+        
+        <channel id="Audio2">
+            <audio>
+                <file>nil</file>
+                <start-point>00:00:00:00</start-point><!-- h:m:s:ms or hours:minutes:seconds:milliseconds -->
+                <end-point>00:00:12:00</end-point><!-- Same as the start-point -->
+                <place>00:00:07:00</place><!-- h:m:s:ms --> 
+                
+                <!-- By default, this should contain the start- and endpoints -->
+                <volumepoints>
+                    <volumepoint>
+                        <volume>0</volume>
+                        <point>00:00:00:00</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:10:500</point>
+                    </volumepoint> 
+                    <volumepoint>
+                        <volume>100</volume>
+                        <point>00:00:12:00</point>
+                    </volumepoint> 
+                </volumepoints>
+            </audio>
+        </channel>
+        
+    </audio-channels>
+    
+</movie>
