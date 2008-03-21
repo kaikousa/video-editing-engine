@@ -1,5 +1,5 @@
-require '../lib/model/visual'
-require '../lib/model/volume_point'
+require 'model/visual'
+require 'model/volume_point'
 require 'test/unit'
  
 class TestVisual < Test::Unit::TestCase

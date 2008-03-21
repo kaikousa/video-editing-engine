@@ -1,7 +1,7 @@
 # Name: TestVolumePoint
 # Author: Kai Kousa
 # Description: Test cases for VolumePoint-class
-require "../lib/model/volume_point"
+require "model/volume_point"
 require 'test/unit'
  
 

@@ -2,9 +2,9 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 require 'test/unit'
-require "../lib/model/movie"
-require "../lib/model/visual"
-require "../lib/model/audio"
+require "model/movie"
+require "model/visual"
+require "model/audio"
 
 class TestMovie < Test::Unit::TestCase
   

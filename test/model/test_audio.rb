@@ -1,7 +1,7 @@
 # Name: TestAudio
 # Author: Kai Kousa
 # Description: Test cases for Audio-class
-require '../lib/model/audio'
+require 'model/audio'
 require 'test/unit'
 
 class TestAudio < Test::Unit::TestCase

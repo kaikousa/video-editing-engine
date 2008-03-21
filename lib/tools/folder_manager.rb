@@ -7,4 +7,11 @@ class FolderManager
   def initialize
     
   end
+  
+  def createProjectFolder(projectName)
+      time = Time.now
+      dirName = projectName + time
+      
+  end
+  
 end
