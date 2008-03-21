@@ -16,7 +16,16 @@ class Visual
     @endPoint = TimeCode.new(endPoint)
     @place = TimeCode.new(place)
     @mute = mute
-    @volumePoints = volumePoints  
+    @volumePoints = volumePoints 
+    unless @volumePoints == nil
+        @volumePoints = []
+    end
+    
+    unless @volumePoints.length == 0
+        @volumePoints << VolumePoint.new(100, 0)
+        @volumePoints << VolumePoint.new(100, self.length)
+    end        
+     
     @effects = effects
   end
   
