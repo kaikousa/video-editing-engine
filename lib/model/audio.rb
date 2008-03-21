@@ -13,6 +13,14 @@ class Audio
     @endPoint = TimeCode.new(endPoint)
     @place = TimeCode.new(place)
     @volumePoints = volumePoints
+    unless @volumePoints == nil
+        @volumePoints = []
+    end
+    
+    unless @volumePoints.length == 0
+        @volumePoints << VolumePoint.new(100, 0)
+        @volumePoints << VolumePoint.new(100, self.length)
+    end
   end
   
   def startPoint=(point)
