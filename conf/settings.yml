@@ -1,1 +1,11 @@
 workspace: workspace
+
+audio_extract: ffmpeg -i <source> -ar 44100 -ac 2 -ab 1411 <target> 1>/dev/null 2>&1
+
+video_trim: ffmpeg -i <source> -vcodec mjpeg -b 2000 -qscale 2 -an -s <width>x<height> -padcolor 000000 -padtop <padding_top> -padbottom <padding_bottom> -r 25 -ss <in> -t <length> -y <target> 1>/dev/null 2>&1
+
+still_video: ffmpeg -loop_input -vframes <frames> -f image2 -i <source> -vcodec mjpeg -b 2000 -qscale 1 -an -s <resolution> -r 25 -y <target> 1>/dev/null 2>&1
+
+video_combine: mencoder -forceidx -oac copy -ovc copy -noskip -o <target> <source> 1>/dev/null 2>&1
+
+final_mux: ffmpeg -i <source_video> -i <source_audio> <audio_options> <video_options> <target> 1>/dev/null 2>&1
