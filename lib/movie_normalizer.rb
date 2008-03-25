@@ -9,9 +9,7 @@ class MovieNormalizer
     
   end
   
-  def normalize(movie)
-    stripAudio(movie)
-  
+  def normalize(movie)  
     updateAll("MovieNormalizer", "Searching for overlapping visuals...")
     overlapped = mergeVisuals(movie)
     
@@ -27,6 +25,8 @@ class MovieNormalizer
       truncateEndOfVideoTrack(movie)
       updateAll("MovieNormalizer", "Audiotrack is longer than the videotrack! Added black screen to the end of videotrack.")
     end
+    
+    stripAudio(movie)
     
     return movie
   end
