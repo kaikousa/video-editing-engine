@@ -4,10 +4,11 @@
 #that compose a movie.
 require 'model/audio_sequence'
 require 'model/visual_sequence'
+require 'project'
 
 class Movie
   
-  attr_reader(:name, :format, :resolution, :audioSequence, :visualSequence, :effects)
+  attr_reader(:name, :format, :resolution, :audioSequence, :visualSequence, :effects, :project, :width, :height)
   
   def initialize(name, format, resolution)
     @name = name
@@ -15,7 +16,9 @@ class Movie
     @resolution = resolution
     @audioSequence = AudioSequence.new
     @visualSequence = VisualSequence.new
-    @effects = []    
+    @effects = []
+    @project = Project.new(@name)
+    setWidthAndHeight(@resolution)
   end
   
   def visualSequence=(visualSequence)
@@ -47,4 +50,10 @@ class Movie
     "\nName: #{@name}\nFormat: #{@format}\nResolution: #{@resolution}\n\n"
   end
   
+  def setWidthAndHeight(resolution)
+      widthAndHeight = resolution.split('x')
+      @width = widthAndHeight[0]
+      @height = widthAndHeight[1]
+  end
+  private :setWidthAndHeight
 end
