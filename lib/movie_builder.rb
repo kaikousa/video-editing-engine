@@ -49,7 +49,7 @@ class MovieBuilder
     else
       updateAll("MovieBuilder", "Unknown timeline-format(#{timelineFormat})")
     end
-    
+
     updateAll("MovieBuilder", "...object model finished!")
     
     return @movie
