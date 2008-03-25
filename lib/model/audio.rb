@@ -1,7 +1,7 @@
 #Name: Audio
 #Author: Kai Kousa
 #Description: Encapsulates all audio related data
-require "tools/time_code"
+require "model/time_code"
 
 class Audio
   
