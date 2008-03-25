@@ -1,4 +1,18 @@
+#
+# General settings:
+#
+
 workspace: workspace
+
+#
+# Settings for inspection:
+#
+
+ffmpeg_get_info: ffmpeg -i <source_file> 2>&1
+
+#
+# Settings for rendering-phase
+#
 
 audio_extract: ffmpeg -i <source> -ar 44100 -ac 2 -ab 1411 <target> 1>/dev/null 2>&1
 
