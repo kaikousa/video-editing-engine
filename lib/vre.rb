@@ -6,18 +6,24 @@
 require 'movie_builder'
 require 'movie_renderer'
 require 'movie_normalizer'
+require 'tools/folder_manager'
 
 class Vre
   def initialize
     
   end
   
-  def main(xmlFile)
+  def processXml(xmlFile)
     builder = MovieBuilder.new
     builder.register(self)
-    builder.buildMovie(xmlFile)
-    movie = builder.movie
-    
+    movie = builder.buildMovie(xmlFile)
+    processMovie(movie)
+  end
+  
+  def processMovie(movie)
+    folderManager = FolderManager.new
+    folderManager.createProjectLayout(movie.project)
+    puts "Created folders for the project in workspace: #{movie.project.root}"
     normalizer = MovieNormalizer.new
     normalizer.register(self)
     puts "Begin normalization..."
@@ -38,13 +44,14 @@ class Vre
     renderer = MovieRenderer.new
     renderer.register(self)
     renderer.render(movie)
-    
   end
   
   def update(sender, message)
     puts "#{sender}: #{message}"
   end
 end
+
+#This section is for launching the VRE on the command line.
 
 puts "\nVideo Rendering Engine (v.0.1-alpha)"
 puts ""
@@ -58,7 +65,7 @@ else
   start = Time.now
 
   vre = Vre.new()
-  vre.main(xmlFile)
+  vre.processXml(xmlFile)
 
   stop = Time.now
   puts "It took #{stop - start} seconds to finish"
