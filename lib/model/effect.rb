@@ -2,7 +2,7 @@
 #Author: Kai Kousa
 #Description: Encapsulates data that the effects processor needs to know
 #in order to apply the effect.
-require "tools/time_code"
+require "model/time_code"
 
 class Effect
   

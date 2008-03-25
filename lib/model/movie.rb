@@ -4,7 +4,7 @@
 #that compose a movie.
 require 'model/audio_sequence'
 require 'model/visual_sequence'
-require 'project'
+require 'model/project'
 
 class Movie
   

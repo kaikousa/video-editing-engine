@@ -3,7 +3,7 @@
 # Description: Main-class for rendering. This class parses the command-line 
 # parameters and delegates tasks to other classes
 # 
-require 'movie_builder'
+require 'builders/movie_builder'
 require 'movie_renderer'
 require 'movie_normalizer'
 require 'tools/folder_manager'

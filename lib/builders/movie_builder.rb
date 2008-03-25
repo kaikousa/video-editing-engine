@@ -7,8 +7,8 @@ require "rexml/document"
 include REXML
 require "model/movie"
 require "model/effect"
-require "channeled_builder"
-require "sequenced_builder"
+require "builders/channeled_builder"
+require "builders/sequenced_builder"
 require "observable"
 include Observable
 

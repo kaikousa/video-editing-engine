@@ -2,8 +2,8 @@
 # Author: Kai Kousa
 # Description: MovieRenderer is responsible for directing the rendering process.
 
-require 'video_tools'
-require 'audio_tools'
+require 'tools/video_tools'
+require 'tools/audio_tools'
 require 'model/audio_sequence'
 require 'observable'
 include Observable
