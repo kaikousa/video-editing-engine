@@ -39,13 +39,13 @@ class MovieRenderer
   def processAudio(movie)
     audios = movie.audioSequence.sort
     audios.each{|audio|
-      @audioTool.convertAudio(audio)
-      @audioTool.trimAudio(audio)
+      @audioTool.convertAudio(audio, movie.project)
+      @audioTool.trimAudio(audio, movie.project)
     }
     audioSequence = AudioSequence.new
     audioSequence.audios=(audios)
     movie.audioSequence=(audioSequence)
-    @audioTool.mixAudioSequence(audioSequence)
+    @audioTool.mixAudioSequence(audioSequence, movie.project)
   end
   
   #Trim/generate -> Combine -> Result: Videotrack
