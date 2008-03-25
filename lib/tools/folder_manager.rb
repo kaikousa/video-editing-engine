@@ -9,32 +9,41 @@ class FolderManager
     
   end
   
-  def createProjectLayout(projectName)
-      #time = Time.now.strftime("%H%M%S%d%m%Y") #hour minute second day mont year
+  def createProjectLayout(project)
       workspace = Config.instance.vreRoot + Config.instance.settings['workspace']
-      #projectFolder = workspace + "/#{projectName}-#{time.to_s}"
-      projectFolder = workspace + "/" + projectName
-      createDirectory(projectFolder)
-      createDirectory(projectFolder + "/originals")
-      createDirectory(projectFolder + "/converted")
-      createDirectory(projectFolder + "/final")
+      time = Time.now.strftime("%H%M%S%d%m%Y") #hour minute second day mont year
+      projectFolder = workspace + "/#{project.name.gsub(" ", "_")}-#{time.to_s}"
+      #projectFolder = workspace + "/" + project.name
+      project.setProjectFolders(projectFolder)
+      createDirectory(project.root)
+      createDirectory(project.originals)
+      createDirectory(project.converted)
+      createDirectory(project.final)
   end
   
-  def cleanProjectFolder(projectName)
-      workspace = Config.instance.vreRoot + Config.instance.settings['workspace']
-      projectFolder = workspace + "/" + projectName
-      removeDirectory(projectFolder + "/converted")
-      removeDirectory(projectFolder + "/originals")
+  def cleanProjectFolder(project)
+      removeDirectory(project.converted)
+      removeDirectory(project.originals)
   end
   
-  def deleteProjectFolder(projectName)
-      workspace = Config.instance.vreRoot + Config.instance.settings['workspace']
-      projectFolder = workspace + "/" + projectName
-      removeDirectory(projectFolder + "/converted")
-      removeDirectory(projectFolder + "/originals")
-      removeDirectory(projectFolder + "/final")
-      removeDirectory(projectFolder)
+  def deleteProjectFolder(project)
+      removeDirectory(project.converted)
+      removeDirectory(project.originals)
+      removeDirectory(project.final)
+      removeDirectory(project.root)
   end
+  
+  #Destroys the files in a directory
+  def clearDirectory(dir)
+      if(File.exists?(dir))
+        Dir.foreach(dir){|entry|
+            if(File.file?(entry))
+                File.delete(entry)
+            end
+        }
+      end
+  end
+  private :clearDirectory
   
   def createDirectory(dir)
       Dir.mkdir(dir) unless File.exists?(dir)
@@ -44,11 +53,7 @@ class FolderManager
   #Delete files from the directory and delete it afterwards
   def removeDirectory(dir)
       if(File.exists?(dir))
-        Dir.foreach(dir){|entry|
-            if(File.file?(entry))
-                File.delete(entry)
-            end
-        }
+        clearDirectory(dir)
         Dir.rmdir(dir)
       end
   end
