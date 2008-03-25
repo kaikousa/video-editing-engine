@@ -2,8 +2,6 @@
 #Author: Kai Kousa
 #Description: Encapsulates data related to a visual element in the movie
 #(video, images)
-#require "splittable"
-#include Splittable
 
 class Visual
   
