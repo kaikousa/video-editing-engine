@@ -8,10 +8,11 @@ include REXML
 require "model/movie"
 require "model/effect"
 require "model/volume_point"
+require "builders/basic_builder"
 require "observable"
 include Observable
 
-class ChanneledBuilder
+class ChanneledBuilder < BasicBuilder
   def initialize
     
   end
@@ -22,50 +23,9 @@ class ChanneledBuilder
     visualSequence = VisualSequence.new
     videoChannels = XPath.first(xml, "/movie/video-channels")
     XPath.each(videoChannels, "channel"){ |channel| 
-      XPath.each(channel, "visual"){|e|
-        type = e.attribute("type")
-        file = XPath.first(e, "file").text
-        startPoint = XPath.first(e, "clip-start").text
-        endPoint = XPath.first(e, "clip-end").text
-        place = XPath.first(e, "place").text
-        mute = XPath.first(e, "mute").text
-        if(mute == "true")
-          mute = true
-        elsif(mute == "false")
-          mute = false
-        end
-      
-        volumePoints = []
-        
-        XPath.each(e, "volumepoints/volumepoint"){|volPoint|
-          point = XPath.first(volPoint, "point").text
-          volume = XPath.first(volPoint, "volume").text
-          volumePoints << VolumePoint.new(volume, point)
-        }
-        
-        #parse effects
-        effects = []
-        visualEffects = XPath.first(e, "effects")
-        visualEffects.each_element_with_text(){|element|
-          puts "effects"
-          name = element.attribute("name")
-          effectStartPoint = element.attribute("startPoint").to_s
-          effectEndPoint = element.attribute("endPoint").to_s
-          parameters = {}
-          element.each_element_with_text(){|param|
-           paramName = param.attribute("name")
-           paramValue = param.text
-            parameters.merge!({paramName => paramValue})
-          }
-          effect = Effect.new(name, effectStartPoint, effectEndPoint, parameters)
-          effects << effect
-        }
-      
-        visual = Visual.new(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
-        visualSequence.addVideo(visual) 
-      }
-      
-          
+      XPath.each(channel, "visual"){|visual|
+        visualSequence.addVideo(readVisual(visual)) 
+      }     
     }
     movie.visualSequence=(visualSequence)
     
@@ -73,25 +33,9 @@ class ChanneledBuilder
     audioSequence = AudioSequence.new
     audioChannels = XPath.first(xml, "/movie/audio-channels")
     XPath.each(audioChannels, "channel"){ |channel| 
-      XPath.each(channel, "audio"){|e|
-        file = XPath.first(e, "file").text
-        startPoint = XPath.first(e, "start-point").text
-        endPoint = XPath.first(e, "end-point").text
-        place = XPath.first(e, "place").text
-
-        volumePoints = []
-        
-        XPath.each(e, "volumepoints/volumepoint"){|volPoint|
-          point = XPath.first(volPoint, "point").text
-          volume = XPath.first(volPoint, "volume").text
-          volumePoints << VolumePoint.new(volume, point)
-        }
-      
-        audio = Audio.new(file, startPoint, endPoint, place, volumePoints)
-        audioSequence.addAudio(audio)       
-      }
-      
-      
+      XPath.each(channel, "audio"){|audio|
+        audioSequence.addAudio(readAudio(audio))       
+      } 
     }
     movie.audioSequence=(audioSequence)#Add the parsed audiosequence to movie
  
