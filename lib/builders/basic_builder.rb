@@ -7,7 +7,7 @@
 
 class BasicBuilder
   def readVisual(visual)
-    type = visual.attribute("type")
+    type = visual.attribute("type").to_s
     file = XPath.first(visual, "file").text
     startPoint = XPath.first(visual, "clip-start").text
     endPoint = XPath.first(visual, "clip-end").text
@@ -54,8 +54,8 @@ class BasicBuilder
     effectEndPoint = effect.attribute("endPoint").to_s
     parameters = {}
     effect.each_element_with_text(){|param|
-    paramName = param.attribute("name")
-    paramValue = param.text
+      paramName = param.attribute("name").to_s
+      paramValue = param.text
       parameters.merge!({paramName => paramValue})
     }
     return Effect.new(name, effectStartPoint, effectEndPoint, parameters)
