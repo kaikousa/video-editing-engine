@@ -1,5 +1,6 @@
 require 'model/visual'
 require 'model/volume_point'
+require 'model/time_code'
 require 'test/unit'
  
 class TestVisual < Test::Unit::TestCase
@@ -39,4 +40,11 @@ class TestVisual < Test::Unit::TestCase
     visual = getDefaultVisual()
     assert_equal("0:0:10:0", visual.timelineEndPoint.timeCodeStr)
   end
+  
+  def testLengthInSeconds
+    visual = getDefaultVisual()
+    visual.endPoint=(TimeCode.new("01:01:01:100"))
+    assert_equal(3661, visual.lengthInSeconds)
+  end
+  
 end
