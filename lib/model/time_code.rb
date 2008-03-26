@@ -1,7 +1,8 @@
 #Name: TimeCode
 #Author: Kai Kousa
 #Description: Encapsulates TimeCodes and provides tools to convert
-#string representations to more useful formats
+#string representations to more useful formats. Stores the time in 
+#milliseconds and in string-representation.
  
 
 class TimeCode
@@ -39,7 +40,7 @@ class TimeCode
   end
   private :convertToMs
   
-  #Return this TimeCode in milliseconds
+  #Set the TimeCode in milliseconds
   def milliseconds=(ms)
     @milliseconds = ms
 
@@ -56,6 +57,22 @@ class TimeCode
   def timeCodeStr=(str)
     @timeCodeStr = str
     @milliseconds = convertToMs()
+  end
+  
+  def seconds()
+    ms = @milliseconds
+    hours = ms / 3600000
+    ms = ms - (hours * 3600000) 
+    minutes = ms / 60000 
+    ms = ms - (minutes * 60000)
+    seconds = ms / 1000
+    ms = ms - (seconds * 1000)
+    
+    if(ms > 499)
+      seconds += 1
+    end
+    
+    return (hours * 60 * 60) + (minutes * 60) + seconds
   end
   
   #Add the value of another TimeCode to this and return the result
