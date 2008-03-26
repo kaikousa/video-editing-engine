@@ -35,4 +35,14 @@ class TestTimeCode < Test::Unit::TestCase
     assert_equal("2:2:10:10", (a - b).timeCodeStr)
   end
   
+  def testSeconds
+    a = TimeCode.new("01:01:01:100")
+    assert_equal(3661, a.seconds)
+  end
+  
+  def testSecondsRoundedMilliseconds
+    a = TimeCode.new("01:01:01:500")
+    assert_equal(3662, a.seconds)
+  end
+  
 end
