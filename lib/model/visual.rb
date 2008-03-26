@@ -6,6 +6,7 @@
 class Visual
   
   attr_reader(:type, :file, :startPoint, :endPoint, :place, :mute, :volumePoints, :effects)
+  attr_reader(:fps, :width, :height)
   
   def initialize(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
     @type = type
@@ -14,17 +15,28 @@ class Visual
     @endPoint = TimeCode.new(endPoint)
     @place = TimeCode.new(place)
     @mute = mute
+    
     @volumePoints = volumePoints 
     unless @volumePoints == nil
         @volumePoints = []
-    end
-    
+    end    
     unless @volumePoints.length == 0
         @volumePoints << VolumePoint.new(100, 0)
         @volumePoints << VolumePoint.new(100, self.length)
     end        
      
     @effects = effects
+    @fps = 0
+    @height = 0
+    @width = 0
+  end
+  
+  def type=(type)
+    @type = type
+  end
+  
+  def file=(file)
+    @file = file
   end
   
   def startPoint=(startPoint)
@@ -51,9 +63,25 @@ class Visual
     @effects = effects
   end  
   
+  def fps=(fps)
+    @fps = fps
+  end
+  
+  def height=(height)
+    @height = height
+  end
+  
+  def width=(width)
+    @width = width
+  end
+  
   #Returns the length of the clip (endpoint - startpoint)
   def length()
     return (@endPoint.milliseconds - @startPoint.milliseconds)
+  end
+  
+  def lengthInSeconds()
+    return (@endPoint.seconds - @startPoint.seconds)
   end
   
   def timelineEndPoint()
