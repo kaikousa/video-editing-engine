@@ -4,16 +4,17 @@
 
 class Project
     
-    attr_reader :root, :converted, :final, :originals, :name
+    attr_reader :root, :converted, :final, :originals, :name, :trimmed
     
     def initialize(projectName)
         @name = projectName
     end
     
     def setProjectFolders(projectRoot)
-        @root = projectRoot
-        @converted = projectRoot + "/converted"
-        @final = projectRoot + "/final"
-        @originals = projectRoot + "/originals"
+      @root = projectRoot
+      @converted = projectRoot + "/converted"
+      @final = projectRoot + "/final"
+      @originals = projectRoot + "/originals"
+      @trimmed = projectRoot + "/trimmed"
     end
 end
