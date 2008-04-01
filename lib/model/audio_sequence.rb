@@ -30,5 +30,11 @@ class AudioSequence
     end    
     @audios
   end
+  
+  def to_s
+    @audios.each{|audio|
+      puts audio.file
+    }
+  end
 
 end
