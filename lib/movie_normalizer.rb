@@ -28,6 +28,8 @@ class MovieNormalizer
     
     stripAudio(movie)
     
+    #viewVisuals(movie.visualSequence.visuals)
+    
     return movie
   end
   
@@ -115,6 +117,7 @@ class MovieNormalizer
   def viewVisuals(visuals)
     0.upto(visuals.length - 1){|i|
       puts "-----------------------"
+      puts "file: #{visuals[i].file}"
       puts "start: #{visuals[i].startPoint.milliseconds}"
       puts "end: #{visuals[i].endPoint.milliseconds}"
       puts "type: #{visuals[i].type}"
