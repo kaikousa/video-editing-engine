@@ -29,7 +29,7 @@ class MovieRenderer
     updateAll("MovieRenderer", "...videoprocessing finished!")
     
     updateAll("MovieRenderer", "Multiplexing audio and video...")
-    @videoTool.multiplex(videoFile, audioFile, movie.format)
+    @videoTool.multiplex(movie, videoFile, audioFile)
     updateAll("MovieRenderer", "...multiplexing finished")
     
     updateAll("MovieRenderer", "Rendering finished!(not really...)")
@@ -57,12 +57,13 @@ class MovieRenderer
       elsif(visual.type == "image")
         @videoTool.createVideoFromImage(movie, visual)
       elsif(visual.type == "blackness")
-        @videoTool.createVideoFromScratch(movie, visual, "")
+        @videoTool.createBlackVideo(movie, visual)
       end
     }
     sequence = VisualSequence.new
     sequence.visuals=(visuals)
-    @videoTool.combineVideo(sequence)
+    movie.visualSequence=(sequence)
+    @videoTool.combineVideo(movie)
   end
   
   def processEffects(movie)
