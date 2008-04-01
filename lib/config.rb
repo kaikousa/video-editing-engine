@@ -4,7 +4,7 @@
 require "yaml"
 class Config
     
-    attr_reader :vreRoot, :configPath, :settings
+    attr_reader(:vreRoot, :configPath, :settings)
     
     def initialize
         libPath = File.dirname(File.expand_path(__FILE__)) + "/" #../VideoRenderingEngine/lib/
@@ -16,7 +16,6 @@ class Config
     
     def self.instance
         if(@config == nil)
-            puts "initialized config"
             @config = Config.new
         end
         @config
