@@ -85,6 +85,22 @@ class TimeCode
     TimeCode.new(@milliseconds - other.milliseconds)
   end
   
+  def toFrames(fps)
+    ms = @milliseconds
+    hours = ms / 3600000
+    ms = ms - (hours * 3600000) 
+    minutes = ms / 60000 
+    ms = ms - (minutes * 60000)
+    seconds = ms / 1000
+    ms = ms - (seconds * 1000)    
+    
+    frames  = hours * 3600 * fps
+    frames += minutes * 60 * fps
+    frames += seconds * fps
+    frames += (fps.to_f * (ms.to_f / 1000)).round
+    return frames
+  end
+  
   def to_s
     @timeCodeStr
   end
