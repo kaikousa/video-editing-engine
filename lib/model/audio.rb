@@ -5,7 +5,7 @@ require "model/time_code"
 
 class Audio
   
-  attr_reader(:file, :startPoint, :endPoint, :place, :volumePoints)
+  attr_reader(:file, :startPoint, :endPoint, :place, :volumePoints, :ewfFile)
   
   def initialize(file, startPoint, endPoint, place, volumePoints)
     @file = file
@@ -21,6 +21,10 @@ class Audio
         @volumePoints << VolumePoint.new(100, 0)
         @volumePoints << VolumePoint.new(100, self.length)
     end
+  end
+  
+  def file=(file)
+    @file = file
   end
   
   def startPoint=(point)
@@ -39,9 +43,17 @@ class Audio
     @volumePoints = points
   end
   
+  def ewfFile=(ewf)
+    @ewfFile = ewf
+  end
+  
   #Returns the length of the clip (endpoint - startpoint)
   def length()
     return (@endPoint.milliseconds - @startPoint.milliseconds)
+  end
+  
+  def lengthInSeconds()
+    return (@endPoint.seconds - @startPoint.seconds)
   end
   
   def to_str()
