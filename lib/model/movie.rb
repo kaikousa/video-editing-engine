@@ -35,8 +35,12 @@ class Movie
   
   def audioLongerThanVideo?()
     sortedVisuals = @visualSequence.sort
-    
     sortedAudios = @audioSequence.sort
+    
+    if sortedAudios.length == 0 or sortedVisuals.length == 0
+      return false
+    end
+    
     lastAudio = sortedAudios[sortedAudios.length - 1]
     lastVisual = sortedVisuals[sortedVisuals.length - 1]
     if (lastAudio.place.milliseconds + lastAudio.length) > (lastVisual.place.milliseconds + lastVisual.length)
