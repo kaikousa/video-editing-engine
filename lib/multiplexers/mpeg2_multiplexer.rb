@@ -17,7 +17,7 @@ class Mpeg2Multiplexer
     cmd.sub!('<source_audio>', audioFile)
     
     hasAudio = File.exist?(audioFile)
-    finalFile = movie.project.final + "/#{movie.name}.mpg"
+    finalFile = movie.project.final + "/#{movie.project.name}.mpg"
     
     cmd.sub!('<video_options>', '-vcodec mpeg2video -b 6000k -aspect 4:3 -maxrate 6000k -minrate 6000k -bufsize 4000k -g 15 -intra -ilme mpeg2video')
     cmd.sub!('<target>', finalFile)

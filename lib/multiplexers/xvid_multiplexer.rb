@@ -22,18 +22,18 @@ class XvidMultiplexer
   end
   
   def multiplex(movie, videoFile, audioFile)
+    hasAudio = File.exist?(audioFile)
+    
     cmd = @settings['final_mux'].dup
     cmd.sub!('<source_video>', videoFile)
     cmd.sub!('<source_audio>', audioFile)
-    
-    hasAudio = File.exist?(audioFile)
     
     vcodec = 'xvid'
     vcodec = 'libxvid' if @newFfmpeg
     acodec = 'mp3'
     acodec = 'libmp3lame' if @newFfmpeg
 
-    finalFile = movie.project.final + "/#{movie.name}.avi"
+    finalFile = movie.project.final + "/#{movie.project.name}.avi"
     
     cmd.sub!('<video_options>', "-vcodec #{vcodec} -b 1600 -qscale 5")
     cmd.sub!('<target>', finalFile)
