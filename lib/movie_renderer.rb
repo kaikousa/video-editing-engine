@@ -10,9 +10,9 @@ include Observable
 
 class MovieRenderer
   
-  def initialize
-    @videoTool = VideoTools.new
-    @audioTool = AudioTools.new
+  def initialize(videoTool = VideoTools.new, audioTool = AudioTools.new)
+    @videoTool = videoTool
+    @audioTool = audioTool
   end
   
   def render(movie)
@@ -32,7 +32,7 @@ class MovieRenderer
     @videoTool.multiplex(movie, videoFile, audioFile)
     updateAll("MovieRenderer", "...multiplexing finished")
     
-    updateAll("MovieRenderer", "Rendering finished!(not really...)")
+    updateAll("MovieRenderer", "Rendering finished!")
   end
   
   #Convert -> Trim -> Combine -> Result: Audiotrack
