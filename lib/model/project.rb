@@ -7,7 +7,10 @@ class Project
     attr_reader :root, :converted, :final, :originals, :name, :trimmed
     
     def initialize(projectName)
-        @name = projectName
+      #Convert the project's name more file system friendly
+      projectName = projectName.gsub(" ", "_")#Remove whitespaces
+      projectName = projectName.gsub(",", "")#Remove commas
+      @name = projectName
     end
     
     def setProjectFolders(projectRoot)
