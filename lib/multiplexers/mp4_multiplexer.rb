@@ -16,7 +16,7 @@ class Mp4Multiplexer
     cmd.sub!('<source_audio>', audioFile)
     
     hasAudio = File.exist?(audioFile)
-    finalFile = movie.project.final + "/#{movie.name}.mp4"
+    finalFile = movie.project.final + "/#{movie.project.name}.mp4"
     
     cmd.sub!('<video_options>', '-vcodec mpeg4 -b 200 -maxrate 200 -minrate 200 -bufsize 512')
     cmd.sub!('<target>', finalFile + 'current.mp4')
