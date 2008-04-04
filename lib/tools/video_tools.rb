@@ -4,15 +4,17 @@
 # Contributions: fitVideoToScreen-method and most of the method-implementations
 # were taken from Fooga's original sources.
 
-require 'config'
+require 'vre_config'
 require 'tools/video_inspector'
 require 'multiplexers/xvid_multiplexer'
 require 'multiplexers/mpeg2_multiplexer'
 require 'multiplexers/mp4_multiplexer'
+require 'rubygems'
+require 'RMagick'
 
 class VideoTools
   def initialize
-    @settings = Config.instance.settings
+    @settings = VREConfig.instance.settings
     @generatedVideos = 0
   end
   
@@ -42,6 +44,42 @@ class VideoTools
   def createVideoFromImage(movie, visual)
     #Create a video file from an image using the properties of Visual-object.
     #Update type and file of the Visual
+    
+    sourceImage = Magick::Image.read(visual.file).first
+    resized = sourceImage.change_geometry(movie.resolution){|cols, rows, img|
+      img.resize!(cols, rows, filter=Magick::LanczosFilter)
+    }
+    blackBg = Magick::Image.new(movie.width.to_i, movie.height.to_i){
+      self.background_color = "black"
+    }
+    xOffset = 0
+    yOffset = 0
+    videoRatio = movie.width.to_i / movie.height.to_i.to_f
+    stillRatio = resized.columns / resized.rows.to_f
+    if(stillRatio < videoRatio)
+      xOffset = ((movie.width.to_i - resized.columns) / 2).round
+    else
+      yOffset = ((movie.height.to_i - resized.rows) / 2).round
+    end
+    
+    filename = (File.basename(visual.file)).split(".")[0] + "_trimmed."
+    
+    gc = Magick::Draw.new
+    gc.composite(xOffset, yOffset, 0, 0, resized)
+    gc.draw(blackBg)
+    blackBg.write(filename + "jpg"){
+      self.quality = 100
+    }
+    cmd = @settings['still_video'].dup
+    length = visual.endPoint - visual.startPoint
+    cmd.sub!('<frames>', length.toFrames(25).to_s)
+    cmd.sub!('<source>', filename + "jpg")
+    cmd.sub!('<resolution>', movie.resolution)
+    cmd.sub!('<target>', filename + "avi")
+    
+    visual.file = filename + "avi"
+    visual.type = "video"
+    system(cmd)
   end
   
   def createBlackVideo(movie, visual)
@@ -52,7 +90,7 @@ class VideoTools
     cmd = @settings['still_video'].dup
     length = visual.endPoint - visual.startPoint
     cmd.sub!('<frames>', length.toFrames(25).to_s)
-    cmd.sub!('<source>', Config.instance.vreRoot + "resources/black_box.png")
+    cmd.sub!('<source>', VREConfig.instance.vreRoot + "resources/black_box.png")
     cmd.sub!('<resolution>', movie.resolution)
     cmd.sub!('<target>', filename)
     system(cmd)

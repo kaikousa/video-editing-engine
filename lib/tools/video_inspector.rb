@@ -3,7 +3,7 @@
 # original Fooga sources.
 # Description: 
 
-require 'config'
+require 'vre_config'
 
 class VideoInspector
   def initialize
@@ -13,7 +13,7 @@ class VideoInspector
   def inspect(visual)
     fps = 0.0
 
-    cmd = Config.instance.settings['ffmpeg_get_info']
+    cmd = VREConfig.instance.settings['ffmpeg_get_info']
     cmd.sub!('<source_file>', visual.file)
 
     IO.popen(cmd) do |pipe|

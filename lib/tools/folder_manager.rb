@@ -2,7 +2,7 @@
 # Author: Kai Kousa
 # Description: Manages the temporary folders (create, delete...)
 
-require 'config'
+require 'vre_config'
 
 class FolderManager
   def initialize
@@ -10,7 +10,7 @@ class FolderManager
   end
   
   def createProjectLayout(project)
-      workspace = Config.instance.vreRoot + Config.instance.settings['workspace']
+      workspace = VREConfig.instance.vreRoot + VREConfig.instance.settings['workspace']
       time = Time.now.strftime("%H%M%S%d%m%Y") #hour minute second day month year
 
       projectFolder = workspace + "/#{project.name}-#{time.to_s}"

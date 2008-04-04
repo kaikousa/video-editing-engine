@@ -4,11 +4,11 @@
 # Contributions: Method implementations have been copied and 
 # refactored from work by Matti Venäläinen and Markku Lempinen.
  
-require 'config'
+require 'vre_config'
 
 class Mpeg2Multiplexer
   def initialize
-    @settings = Config.instance.settings
+    @settings = VREConfig.instance.settings
   end
   
   def multiplex(movie, videoFile, audioFile)
