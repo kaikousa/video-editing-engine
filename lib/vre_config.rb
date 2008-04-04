@@ -2,7 +2,7 @@
 # Author: Kai Kousa
 # Description: Singleton class to provide global access to settings
 require "yaml"
-class Config
+class VREConfig
     
     attr_reader(:vreRoot, :configPath, :settings)
     
@@ -16,7 +16,7 @@ class Config
     
     def self.instance
         if(@config == nil)
-            @config = Config.new
+            @config = VREConfig.new
         end
         @config
     end
