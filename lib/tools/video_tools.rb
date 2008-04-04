@@ -62,7 +62,7 @@ class VideoTools
       yOffset = ((movie.height.to_i - resized.rows) / 2).round
     end
     
-    filename = (File.basename(visual.file)).split(".")[0] + "_trimmed."
+    filename = movie.project.trimmed + "/" + (File.basename(visual.file)).split(".")[0] + "_trimmed."
     
     gc = Magick::Draw.new
     gc.composite(xOffset, yOffset, 0, 0, resized)
