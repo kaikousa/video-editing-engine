@@ -6,7 +6,7 @@ require "model/time_code"
 
 class Effect
   
-  attr_reader(:name, :properties)
+  attr_reader(:name, :properties, :endPoint, :startPoint)
   
   def initialize(name, startPoint, endPoint, properties)
     @name = name
