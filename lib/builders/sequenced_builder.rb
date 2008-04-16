@@ -23,14 +23,14 @@ class SequencedBuilder < BasicBuilder
     XPath.each(xml, "/movie/sequence/visual"){ |visual| 
       visualSequence.addVideo(readVisual(visual)) 
     }
-    movie.visualSequence=(visualSequence)
+    movie.visualSequence = visualSequence
     
     #Parse audio sequence from xml
     audioSequence = AudioSequence.new
     XPath.each(xml, "/movie/sequence/audio"){ |audio| 
       audioSequence.addAudio(readAudio(audio))      
     }
-    movie.audioSequence=(audioSequence)#Add the parsed audiosequence to movie
+    movie.audioSequence = audioSequence #Add the parsed audiosequence to movie
     
     return movie
   end

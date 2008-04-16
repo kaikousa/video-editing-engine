@@ -82,9 +82,9 @@ class VideoTools
     system(cmd)
   end
   
+  #Creates a black screen for that is as long as the given visual
   def createBlackVideo(movie, visual)
-    #Render an image and attach a centered text to it.
-    #then create a video file from it
+    #Render an image and create a video file from it
     @generatedVideos += 1
     filename = movie.project.trimmed + "/generated-#{@generatedVideos}.avi"
     cmd = @settings['still_video'].dup
@@ -99,6 +99,7 @@ class VideoTools
     visual.mute = true
   end
   
+  #Combine clips in a movie
   def combineVideo(movie)
     trimmedVisuals = ""
     contents = movie.visualSequence.visuals
@@ -114,6 +115,7 @@ class VideoTools
     return videoFile
   end
   
+  #Combine video- and audiotracks to one videofile
   def multiplex(movie, videoFile, audioFile)
     codecs = ['xvid', 'mpeg2', 'mp4']
     codec = 'xvid'

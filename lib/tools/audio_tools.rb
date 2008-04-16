@@ -31,7 +31,7 @@ class AudioTools
     f = File.new(filename, 'w')
     f.write(ewf)
     f.close
-    audio.ewfFile=(filename)
+    audio.ewfFile = filename
   end
   
   def mixAudioSequence(sequence, project)

@@ -27,7 +27,7 @@ class ChanneledBuilder < BasicBuilder
         visualSequence.addVideo(readVisual(visual)) 
       }     
     }
-    movie.visualSequence=(visualSequence)
+    movie.visualSequence = visualSequence
     
     #Parse audio sequence from xml
     audioSequence = AudioSequence.new
@@ -37,7 +37,7 @@ class ChanneledBuilder < BasicBuilder
         audioSequence.addAudio(readAudio(audio))       
       } 
     }
-    movie.audioSequence=(audioSequence)#Add the parsed audiosequence to movie
+    movie.audioSequence = audioSequence #Add the parsed audiosequence to movie
  
     return movie
   end

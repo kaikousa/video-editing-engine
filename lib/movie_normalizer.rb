@@ -55,14 +55,14 @@ class MovieNormalizer
         if clipA.inRange?(clipB.place.milliseconds)
           deltaX = (clipA.place.milliseconds + clipA.length) - clipB.place.milliseconds
           unless deltaX == 0
-            clipB.startPoint.milliseconds=(clipB.startPoint.milliseconds + deltaX)
-            clipB.place.milliseconds=(clipB.place.milliseconds + deltaX)
+            clipB.startPoint.milliseconds = (clipB.startPoint.milliseconds + deltaX)
+            clipB.place.milliseconds = (clipB.place.milliseconds + deltaX)
             overlapped += 1
           end          
         end        
       end
     }
-    movie.visualSequence.visuals=(sortedVisuals)
+    movie.visualSequence.visuals = sortedVisuals
     return overlapped
   end
   
@@ -89,7 +89,7 @@ class MovieNormalizer
         end
       end
     }
-    movie.visualSequence.visuals=(sortedVisuals)
+    movie.visualSequence.visuals = sortedVisuals
     return gaps
   end
   
@@ -111,7 +111,7 @@ class MovieNormalizer
     gap = Visual.new("blackness", "nil", gapStart, gapEnd, gapPlace, true, [], [])
     sortedVisuals << gap
     
-    movie.visualSequence.visuals=(sortedVisuals)
+    movie.visualSequence.visuals = sortedVisuals
   end
   
   def viewVisuals(visuals)

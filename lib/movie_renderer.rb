@@ -43,8 +43,8 @@ class MovieRenderer
       @audioTool.trimAudio(audio, movie.project)
     }
     audioSequence = AudioSequence.new
-    audioSequence.audios=(audios)
-    movie.audioSequence=(audioSequence)
+    audioSequence.audios = audios
+    movie.audioSequence = audioSequence
     @audioTool.mixAudioSequence(audioSequence, movie.project)
   end
   
@@ -61,8 +61,8 @@ class MovieRenderer
       end
     }
     sequence = VisualSequence.new
-    sequence.visuals=(visuals)
-    movie.visualSequence=(sequence)
+    sequence.visuals = visuals
+    movie.visualSequence = sequence
     @videoTool.combineVideo(movie)
   end
   

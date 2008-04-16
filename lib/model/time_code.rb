@@ -11,13 +11,13 @@ class TimeCode
   
   def initialize(timeCode)
     if timeCode.instance_of?(String)
-      self.timeCodeStr=(timeCode)
+      self.timeCodeStr = timeCode
     elsif timeCode.instance_of?(Fixnum)
-      self.milliseconds=(timeCode)
+      self.milliseconds = timeCode
     elsif timeCode.instance_of?(Integer)
-      self.milliseconds=(timeCode)
+      self.milliseconds = timeCode
     elsif timeCode.instance_of?(TimeCode)
-      self.milliseconds=(timeCode.milliseconds)
+      self.milliseconds = timeCode.milliseconds
     end
   end
   
