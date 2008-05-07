@@ -45,7 +45,7 @@ class AudioTools
       audiotrackFilename = project.final + "/audiotrack.wav"
     
       ecaCmd << " -a:all -o #{audiotrackFilename} 1>/dev/null 2>&1"
-      puts ecaCmd
+      #puts ecaCmd
       system(ecaCmd)
     else
       audiotrackFilename = Config.instance.vreRoot + "resources/silencio.wav"
