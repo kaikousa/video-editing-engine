@@ -48,7 +48,7 @@ class AudioTools
       #puts ecaCmd
       system(ecaCmd)
     else
-      audiotrackFilename = Config.instance.vreRoot + "resources/silencio.wav"
+      audiotrackFilename = VREConfig.instance.vreRoot + "resources/silencio.wav"
     end
     
     return audiotrackFilename
