@@ -24,7 +24,7 @@ class Mp4Multiplexer
     cmd.sub!('<audio_options>', '-map 0:0 -map 1:0 -acodec amr_nb -b 200 -ab 64 -ar 8000 -ac 1') if hasAudio
     
     cmd.sub!('<audio_options>', '-an') unless hasAudio
-    puts(cmd)
+    #puts(cmd)
     system(cmd)
   end
   

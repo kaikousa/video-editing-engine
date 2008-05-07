@@ -40,7 +40,7 @@ class XvidMultiplexer
     cmd.sub!('<audio_options>', "-map 0:0 -map 1:0 -acodec #{acodec} -ac 2 -ab 128 -ar 44100") if hasAudio
     
     cmd.sub!('<audio_options>', '-an') unless hasAudio
-    puts "ready for multiplexing: #{cmd}"
+    #puts "ready for multiplexing: #{cmd}"
     system(cmd)
   end
   
