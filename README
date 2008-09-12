@@ -5,8 +5,11 @@ The intent of this project is to create a simple yet effective video compiler/
 exporter for web-based videoediting. It could also be used as a simple back-end
 for format conversions.
 
-TODO: Licensing
-TODO: Some documentation
+License
+-------
+
+This software is MIT-licensed. See LICENSE-file for details.
+
 
 History
 -------
