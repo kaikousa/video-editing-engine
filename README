@@ -5,6 +5,9 @@ The intent of this project is to create a simple yet effective video compiler/
 exporter for web-based videoediting. It could also be used as a simple back-end
 for format conversions.
 
+Video Editing Engine is a sister project to Fooga (homepage: www.fooga.org, github: 
+http://github.com/fooga/fooga/tree/master).
+
 License
 -------
 
