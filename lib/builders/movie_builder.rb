@@ -9,6 +9,7 @@ require "model/movie"
 require "model/effect"
 require "builders/channeled_builder"
 require "builders/sequenced_builder"
+require "builders/json_builder"
 require "observable"
 include Observable
 
@@ -22,7 +23,21 @@ class MovieBuilder
   
   #Builds the object model from the given xml-file
   #ToDo: Validate xml
-  def build_movie(xml_file)
+  def build_movie(movie_file)
+    extension = File.extname(movie_file)
+    if(extension == ".xml")
+      return build_from_xml(movie_file)
+    elsif(extension == ".json")
+      update_all("MovieBuilder", "Creating movie from JSON")
+      json_builder = JSONBuilder.new
+      return json_builder.build_movie(movie_file)
+    else
+      update_all("MovieBuilder", "Unknown extension. See documentation for supported formats and markups")
+    end
+    return nil
+  end
+  
+  def build_from_xml(xml_file)
     update_all("MovieBuilder", "Reading the object model from xml(#{xml_file})...")
     xml = Document.new(File.open(xml_file))
     
@@ -53,9 +68,6 @@ class MovieBuilder
     update_all("MovieBuilder", "...object model finished!")
     
     return @movie
-  end
-  
-  def build_from_xml(xml_file)
   end
   
 end

@@ -55,7 +55,7 @@ class TimeCode
   
   #Return the String representation of this TimeCode(h:min:sec:ms)
   def time_code_str=(str)
-    @time_code_tr = str
+    @time_code_str = str
     @milliseconds = convert_to_ms()
   end
   

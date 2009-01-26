@@ -21,7 +21,7 @@ class MovieNormalizer
     
     update_all("MovieNormalizer", "...found and filled #{gaps} gaps!")
     
-    if(movie.audioLongerThanVideo?)
+    if(movie.audio_longer_than_video?)
       truncate_end_of_video_track(movie)
       update_all("MovieNormalizer", "Audiotrack is longer than the videotrack! Added black screen to the end of videotrack.")
     end
@@ -62,7 +62,7 @@ class MovieNormalizer
         end        
       end
     }
-    movie.visualSequence.visuals = sorted_visuals
+    movie.visual_sequence.visuals = sorted_visuals
     return overlapped
   end
   
@@ -89,7 +89,7 @@ class MovieNormalizer
         end
       end
     }
-    movie.visualSequence.visuals = sorted_visuals
+    movie.visual_sequence.visuals = sorted_visuals
     return gaps
   end
   
