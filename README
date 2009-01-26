@@ -8,6 +8,13 @@ for format conversions.
 Video Editing Engine is a sister project to Fooga (homepage: www.fooga.org, github: 
 http://github.com/fooga/fooga/tree/master).
 
+List of features:
+- cuts and combines video- and audiofiles
+- resolves overlapping videoclips or images
+- creates videoclips from images
+- generates black screen to places where only audio channel is present
+- currently supports XML and JSON as project files
+
 License
 -------
 
