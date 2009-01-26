@@ -17,27 +17,27 @@ class ChanneledBuilder < BasicBuilder
     
   end
   
-  def buildMovie(xml, movie)
+  def build_movie(xml, movie)
     
     #Parse a visual sequence from xml
-    visualSequence = VisualSequence.new
-    videoChannels = XPath.first(xml, "/movie/video-channels")
-    XPath.each(videoChannels, "channel"){ |channel| 
+    visual_sequence = VisualSequence.new
+    video_channels = XPath.first(xml, "/movie/video-channels")
+    XPath.each(video_channels, "channel"){ |channel|
       XPath.each(channel, "visual"){|visual|
-        visualSequence.addVideo(readVisual(visual)) 
+        visual_sequence.addVideo(read_visual(visual))
       }     
     }
-    movie.visualSequence = visualSequence
+    movie.visual_sequence = visual_sequence
     
     #Parse audio sequence from xml
-    audioSequence = AudioSequence.new
-    audioChannels = XPath.first(xml, "/movie/audio-channels")
-    XPath.each(audioChannels, "channel"){ |channel| 
+    audio_sequence = AudioSequence.new
+    audio_channels = XPath.first(xml, "/movie/audio-channels")
+    XPath.each(audio_channels, "channel"){ |channel|
       XPath.each(channel, "audio"){|audio|
-        audioSequence.addAudio(readAudio(audio))       
+        audio_sequence.add_audio(read_audio(audio))
       } 
     }
-    movie.audioSequence = audioSequence #Add the parsed audiosequence to movie
+    movie.audio_sequence = audio_sequence #Add the parsed audiosequence to movie
  
     return movie
   end

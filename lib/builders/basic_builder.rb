@@ -9,11 +9,11 @@ class BasicBuilder
   
   #Reads the data from <visual></visual> - node
   #and creates a Visual - object from that data.
-  def readVisual(visual)
+  def read_visual(visual)
     type = visual.attribute("type").to_s
     file = XPath.first(visual, "file").text
-    startPoint = XPath.first(visual, "clip-start").text
-    endPoint = XPath.first(visual, "clip-end").text
+    start_point = XPath.first(visual, "clip-start").text
+    end_point = XPath.first(visual, "clip-end").text
     place = XPath.first(visual, "place").text
     mute = XPath.first(visual, "mute").text
     if(mute == "true")
@@ -24,59 +24,59 @@ class BasicBuilder
     
     #If no VolumePoints are found, an empty array is given.
     #This signals Visual to create default volumepoints.
-    volumePoints = []        
-    XPath.each(visual, "volumepoints/volumepoint"){|volPoint|          
-      volumePoints << readVolumePoint(volPoint)
+    volume_points = []
+    XPath.each(visual, "volumepoints/volumepoint"){|vol_point|
+      volume_points << read_volume_point(vol_point)
     }
         
     #parse effects
     effects = []
-    visualEffects = XPath.first(visual, "effects")
-    visualEffects.each_element_with_text(){|element|
-      effects << readEffect(element)
+    visual_effects = XPath.first(visual, "effects")
+    visual_effects.each_element_with_text(){|element|
+      effects << read_effect(element)
     }
       
-    return Visual.new(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
+    return Visual.new(type, file, start_point, end_point, place, mute, volume_points, effects)
   end
   
   #Reads the data from <audio></audio> - node
   #and creates an Audio - object from that data.
-  def readAudio(audio)
+  def read_audio(audio)
     file = XPath.first(audio, "file").text
-    startPoint = XPath.first(audio, "start-point").text
-    endPoint = XPath.first(audio, "end-point").text
+    start_point = XPath.first(audio, "start-point").text
+    end_point = XPath.first(audio, "end-point").text
     place = XPath.first(audio, "place").text
 
     #If no VolumePoints are found, an empty array is given.
     #This signals Audio to create default volumepoints.
-    volumePoints = []        
-    XPath.each(audio, "volumepoints/volumepoint"){|volPoint|
-      volumePoints << readVolumePoint(volPoint)
+    volume_points = []
+    XPath.each(audio, "volumepoints/volumepoint"){|vol_point|
+      volume_points << read_volume_point(vol_point)
     }
       
-    return Audio.new(file, startPoint, endPoint, place, volumePoints)
+    return Audio.new(file, start_point, end_point, place, volume_points)
   end
   
   #Reads the data from <effect></effect> - node
   #and creates a Effect - object from that data.
-  def readEffect(effect)
+  def read_effect(effect)
     name = effect.attribute("name")
-    effectStartPoint = effect.attribute("startPoint").to_s
-    effectEndPoint = effect.attribute("endPoint").to_s
+    effect_start_point = effect.attribute("startPoint").to_s
+    effect_end_point = effect.attribute("endPoint").to_s
     parameters = {}
     effect.each_element_with_text(){|param|
-      paramName = param.attribute("name").to_s
-      paramValue = param.text
-      parameters.merge!({paramName => paramValue}) #Add a new key-value - pair to existing hash
+      param_name = param.attribute("name").to_s
+      param_value = param.text
+      parameters.merge!({param_name => param_value}) #Add a new key-value - pair to existing hash
     }
-    return Effect.new(name, effectStartPoint, effectEndPoint, parameters)
+    return Effect.new(name, effect_start_point, effect_end_point, parameters)
   end
   
   #Reads the data from <volumepoint></volumepoint> - node
   #and creates a VolumePoint - object from that data.
-  def readVolumePoint(volumePoint)
-    point = XPath.first(volumePoint, "point").text
-    volume = XPath.first(volumePoint, "volume").text
+  def read_volume_point(volume_point)
+    point = XPath.first(volume_point, "point").text
+    volume = XPath.first(volume_point, "volume").text
     return VolumePoint.new(volume, point)
   end
   

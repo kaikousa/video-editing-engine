@@ -15,16 +15,16 @@ require 'RMagick'
 class VideoTools
   def initialize
     @settings = VREConfig.instance.settings
-    @generatedVideos = 0
+    @generated_videos = 0
   end
   
-  def trimVideo(movie, visual)
+  def trim_video(movie, visual)
     inspector = VideoInspector.new
     inspector.inspect(visual)
     
     filename = (File.basename(visual.file)).split(".")[0] + "_trimmed.avi" #Liian clever-clever => refaktoroi
-    trimmedFile = movie.project.trimmed + "/" + filename
-    resolutions = fitVideoToScreen(visual.width, visual.height, movie.width, movie.height)
+    trimmed_file = movie.project.trimmed + "/" + filename
+    resolutions = fit_video_to_screen(visual.width, visual.height, movie.width, movie.height)
     cmd = @settings['video_trim'].dup
     
     cmd.sub!('<source>', visual.file)
@@ -32,47 +32,47 @@ class VideoTools
     cmd.sub!('<height>', resolutions['inner_height'])
     cmd.sub!('<padding_top>', resolutions['padding_top'])
     cmd.sub!('<padding_bottom>', resolutions['padding_bottom'])
-    cmd.sub!('<in>', visual.startPoint)
-    cmd.sub!('<length>', visual.lengthInSeconds.to_s)
-    cmd.sub!('<target>', trimmedFile)
+    cmd.sub!('<in>', visual.start_point)
+    cmd.sub!('<length>', visual.length_in_seconds.to_s)
+    cmd.sub!('<target>', trimmed_file)
     #puts cmd
     puts "Prosessing: #{filename}"
     system(cmd)
-    visual.file = trimmedFile
+    visual.file = trimmed_file
   end
   
-  def createVideoFromImage(movie, visual)
+  def create_video_from_image(movie, visual)
     #Create a video file from an image using the properties of Visual-object.
     #Update type and file of the Visual
     
-    sourceImage = Magick::Image.read(visual.file).first
-    resized = sourceImage.change_geometry(movie.resolution){|cols, rows, img|
+    source_image = Magick::Image.read(visual.file).first
+    resized = source_image.change_geometry(movie.resolution){|cols, rows, img|
       img.resize!(cols, rows, filter=Magick::LanczosFilter)
     }
-    blackBg = Magick::Image.new(movie.width.to_i, movie.height.to_i){
+    black_bg = Magick::Image.new(movie.width.to_i, movie.height.to_i){
       self.background_color = "black"
     }
-    xOffset = 0
-    yOffset = 0
-    videoRatio = movie.width.to_i / movie.height.to_i.to_f
-    stillRatio = resized.columns / resized.rows.to_f
-    if(stillRatio < videoRatio)
-      xOffset = ((movie.width.to_i - resized.columns) / 2).round
+    x_offset = 0
+    y_offset = 0
+    video_ratio = movie.width.to_i / movie.height.to_i.to_f
+    still_ratio = resized.columns / resized.rows.to_f
+    if(still_ratio < video_ratio)
+      x_offset = ((movie.width.to_i - resized.columns) / 2).round
     else
-      yOffset = ((movie.height.to_i - resized.rows) / 2).round
+      y_offset = ((movie.height.to_i - resized.rows) / 2).round
     end
     
     filename = movie.project.trimmed + "/" + (File.basename(visual.file)).split(".")[0] + "_trimmed."
     
     gc = Magick::Draw.new
-    gc.composite(xOffset, yOffset, 0, 0, resized)
-    gc.draw(blackBg)
-    blackBg.write(filename + "jpg"){
+    gc.composite(x_offset, y_offset, 0, 0, resized)
+    gc.draw(black_bg)
+    black_bg.write(filename + "jpg"){
       self.quality = 100
     }
     cmd = @settings['still_video'].dup
-    length = visual.endPoint - visual.startPoint
-    cmd.sub!('<frames>', length.toFrames(25).to_s)
+    length = visual.end_point - visual.start_point
+    cmd.sub!('<frames>', length.to_frames(25).to_s)
     cmd.sub!('<source>', filename + "jpg")
     cmd.sub!('<resolution>', movie.resolution)
     cmd.sub!('<target>', filename + "avi")
@@ -83,14 +83,14 @@ class VideoTools
   end
   
   #Creates a black screen for that is as long as the given visual
-  def createBlackVideo(movie, visual)
+  def create_black_video(movie, visual)
     #Render an image and create a video file from it
-    @generatedVideos += 1
-    filename = movie.project.trimmed + "/generated-#{@generatedVideos}.avi"
+    @generated_videos += 1
+    filename = movie.project.trimmed + "/generated-#{@generated_videos}.avi"
     cmd = @settings['still_video'].dup
-    length = visual.endPoint - visual.startPoint
-    cmd.sub!('<frames>', length.toFrames(25).to_s)
-    cmd.sub!('<source>', VREConfig.instance.vreRoot + "resources/black_box.png")
+    length = visual.end_point - visual.start_point
+    cmd.sub!('<frames>', length.to_frames(25).to_s)
+    cmd.sub!('<source>', VREConfig.instance.vre_root + "resources/black_box.png")
     cmd.sub!('<resolution>', movie.resolution)
     cmd.sub!('<target>', filename)
     system(cmd)
@@ -100,23 +100,23 @@ class VideoTools
   end
   
   #Combine clips in a movie
-  def combineVideo(movie)
-    trimmedVisuals = ""
-    contents = movie.visualSequence.visuals
+  def combine_video(movie)
+    trimmed_visuals = ""
+    contents = movie.visual_sequence.visuals
     contents.each{|visual|
-      trimmedVisuals += " #{visual.file}"
+      trimmed_visuals += " #{visual.file}"
     }
-    videoFile = movie.project.final + "/videotrack.avi"
+    video_file = movie.project.final + "/videotrack.avi"
     cmd = @settings['video_combine'].dup
-    cmd.sub!('<source>', trimmedVisuals)
-    cmd.sub!('<target>', videoFile)
+    cmd.sub!('<source>', trimmed_visuals)
+    cmd.sub!('<target>', video_file)
     puts "Combining videos"
     system(cmd)
     return videoFile
   end
   
   #Combine video- and audiotracks to one videofile
-  def multiplex(movie, videoFile, audioFile)
+  def multiplex(movie, video_file, audio_file)
     codecs = ['xvid', 'mpeg2', 'mp4']
     codec = 'xvid'
     if codecs.include?(movie.format)
@@ -125,18 +125,18 @@ class VideoTools
     
     if(codec == "xvid")
       multiplexer = XvidMultiplexer.new
-      multiplexer.multiplex(movie, videoFile, audioFile)
+      multiplexer.multiplex(movie, video_file, audio_file)
     elsif(codec == "mpeg2")
       multiplexer = Mpeg2Multiplexer.new
-      multiplexer.multiplex(movie, videoFile, audioFile)
+      multiplexer.multiplex(movie, video_file, audio_file)
     elsif(codec == "mp4")
       multiplexer = Mp4Multiplexer.new
-      multiplexer.multiplex(movie, videoFile, audioFile)
+      multiplexer.multiplex(movie, video_file, audio_file)
     end
     
   end
   
-  def fitVideoToScreen (original_w, original_h, target_w, target_h)
+  def fit_video_to_screen (original_w, original_h, target_w, target_h)
 
     ratio = original_w.to_f / original_h.to_f
 

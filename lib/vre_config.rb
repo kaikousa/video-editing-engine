@@ -4,13 +4,13 @@
 require "yaml"
 class VREConfig
     
-    attr_reader(:vreRoot, :configPath, :settings)
+    attr_reader(:vre_root, :config_path, :settings)
     
     def initialize
-        libPath = File.dirname(File.expand_path(__FILE__)) + "/" #../VideoRenderingEngine/lib/
-        @vreRoot = File.expand_path(libPath + "../") + "/" #../VideoRenderingEngine/
-        @configPath = @vreRoot + "conf/" #../VideoRenderingEngine/conf/
-        @settings = YAML.load_file(@configPath + "settings.yml")
+        lib_path = File.dirname(File.expand_path(__FILE__)) + "/" #../VideoRenderingEngine/lib/
+        @vre_root = File.expand_path(lib_path + "../") + "/" #../VideoRenderingEngine/
+        @config_path = @vre_root + "conf/" #../VideoRenderingEngine/conf/
+        @settings = YAML.load_file(@config_path + "settings.yml")
     end
     private :initialize
     

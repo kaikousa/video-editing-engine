@@ -8,13 +8,13 @@ require "model/audio"
 
 class TestMovie < Test::Unit::TestCase
   
-  def testAudioLongerThanVideo
+  def test_audio_longer_than_video
     video = Visual.new("video", "nil", "00:00:00:00", "00:00:10:00", "00:00:00:00", false, [], [])
     audio = Audio.new("nil", "00:00:00:00", "00:00:20:00", "00:00:00:00", [])
     movie = Movie.new("Test", "mp4", "720x576")
-    movie.visualSequence.addVideo(video)
-    movie.audioSequence.addAudio(audio)
-    assert_equal(true, movie.audioLongerThanVideo?)
+    movie.visual_sequence.add_video(video)
+    movie.audio_sequence.add_audio(audio)
+    assert_equal(true, movie.audio_longer_than_video?)
   end
   
 end

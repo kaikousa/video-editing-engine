@@ -10,7 +10,7 @@ module Observable
     @observers << observer
   end
   
-  def updateAll(sender, message)
+  def update_all(sender, message)
     @observers.each{|observer| observer.update(sender, message)}
   end
   

@@ -7,23 +7,23 @@
 
 class TimeCode
   
-  attr_reader(:timeCodeStr, :milliseconds)
+  attr_reader(:time_code_str, :milliseconds)
   
-  def initialize(timeCode)
-    if timeCode.instance_of?(String)
-      self.timeCodeStr = timeCode
-    elsif timeCode.instance_of?(Fixnum)
-      self.milliseconds = timeCode
-    elsif timeCode.instance_of?(Integer)
-      self.milliseconds = timeCode
-    elsif timeCode.instance_of?(TimeCode)
-      self.milliseconds = timeCode.milliseconds
+  def initialize(time_code)
+    if time_code.instance_of?(String)
+      self.time_code_str = time_code
+    elsif time_code.instance_of?(Fixnum)
+      self.milliseconds = time_code
+    elsif time_code.instance_of?(Integer)
+      self.milliseconds = time_code
+    elsif time_code.instance_of?(TimeCode)
+      self.milliseconds = time_code.milliseconds
     end
   end
   
   #Converts string-formatted time code to milliseconds
-  def convertToMs()
-    split = @timeCodeStr.split(":")
+  def convert_to_ms()
+    split = @time_code_str.split(":")
     
     hours = split[0].to_i
     minutes = split[1].to_i
@@ -38,7 +38,7 @@ class TimeCode
     
     return milliseconds
   end
-  private :convertToMs
+  private :convert_to_ms
   
   #Set the TimeCode in milliseconds
   def milliseconds=(ms)
@@ -50,13 +50,13 @@ class TimeCode
     ms = ms - (minutes * 60000)
     seconds = ms / 1000 #1 second == 1000 ms
     ms = ms - (seconds * 1000)
-    @timeCodeStr = "#{hours}:#{minutes}:#{seconds}:#{ms}"
+    @time_code_str = "#{hours}:#{minutes}:#{seconds}:#{ms}"
   end
   
   #Return the String representation of this TimeCode(h:min:sec:ms)
-  def timeCodeStr=(str)
-    @timeCodeStr = str
-    @milliseconds = convertToMs()
+  def time_code_str=(str)
+    @time_code_tr = str
+    @milliseconds = convert_to_ms()
   end
   
   def seconds()
@@ -85,7 +85,7 @@ class TimeCode
     TimeCode.new(@milliseconds - other.milliseconds)
   end
   
-  def toFrames(fps)
+  def to_frames(fps)
     ms = @milliseconds
     hours = ms / 3600000
     ms = ms - (hours * 3600000) 
@@ -102,7 +102,7 @@ class TimeCode
   end
   
   def to_s
-    @timeCodeStr
+    @time_code_str
   end
   
   def to_str

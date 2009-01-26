@@ -5,24 +5,24 @@
 
 class Visual
   
-  attr_reader(:type, :file, :startPoint, :endPoint, :place, :mute, :volumePoints, :effects)
+  attr_reader(:type, :file, :start_point, :end_point, :place, :mute, :volume_points, :effects)
   attr_reader(:fps, :width, :height)
   
-  def initialize(type, file, startPoint, endPoint, place, mute, volumePoints, effects)
+  def initialize(type, file, start_point, end_point, place, mute, volume_points, effects)
     @type = type
     @file = file
-    @startPoint = TimeCode.new(startPoint)
-    @endPoint = TimeCode.new(endPoint)
+    @start_point = TimeCode.new(start_point)
+    @end_point = TimeCode.new(end_point)
     @place = TimeCode.new(place)
     @mute = mute
     
-    @volumePoints = volumePoints 
-    unless @volumePoints == nil
-        @volumePoints = []
+    @volume_points = volume_points
+    unless @volume_points == nil
+        @volume_points = []
     end    
-    unless @volumePoints.length == 0
-        @volumePoints << VolumePoint.new(100, 0)
-        @volumePoints << VolumePoint.new(100, self.length)
+    unless @volume_points.length == 0
+        @volume_points << VolumePoint.new(100, 0)
+        @volume_points << VolumePoint.new(100, self.length)
     end        
      
     @effects = effects
@@ -39,12 +39,12 @@ class Visual
     @file = file
   end
   
-  def startPoint=(startPoint)
-    @startPoint = startPoint
+  def start_point=(start_point)
+    @start_point = start_point
   end
   
-  def endPoint=(endPoint)
-    @endPoint = endPoint
+  def end_point=(end_point)
+    @end_point = end_point
   end
   
   def place=(place)
@@ -55,8 +55,8 @@ class Visual
     @mute = mute
   end
   
-  def volumePoints=(volumePoints)
-    @volumePoints = volumePoints
+  def volume_points=(volume_points)
+    @volume_points = volume_points
   end
   
   def effects=(effects)
@@ -75,23 +75,23 @@ class Visual
     @width = width
   end
   
-  #Returns the length of the clip (endpoint - startpoint)
+  #Returns the length of the clip (end_point - start_point)
   def length()
-    return (@endPoint.milliseconds - @startPoint.milliseconds)
+    return (@end_point.milliseconds - @start_point.milliseconds)
   end
   
-  def lengthInSeconds()
-    return (@endPoint.seconds - @startPoint.seconds)
+  def length_in_seconds()
+    return (@end_point.seconds - @start_point.seconds)
   end
   
-  def timelineEndPoint()
+  def timeline_end_point()
     return (@place + TimeCode.new(length()))
   end
   
   #Returns false if the visual has no audiotrack, is an image,
   #the track is muted or the volume is 0.
   #ToDo: Check the audio from the real file(preferably with the aid of audiotools)
-  #ToDo: Check the levels of VolumePoints
+  #ToDo: Check the levels of volume_points
   def audio?
     #or @volume == 0
     if @mute or @type == "image"
@@ -104,11 +104,11 @@ class Visual
   end
 
   #point = point on the timeline (in milliseconds)
-  def inRange?(point)
+  def in_range?(point)
     #point = TimeCode.new(point)
     if point < @place.milliseconds
       return false
-    elsif  point > (@place.milliseconds + @endPoint.milliseconds)
+    elsif  point > (@place.milliseconds + @end_point.milliseconds)
       return false
     else      
       return true
@@ -116,7 +116,7 @@ class Visual
   end
   
   def to_str()
-    "Type: #{@type} File: #{@file} StartPoint: #{@startPoint} EndPoint: #{@endPoint} Mute: #{@mute} Volume: #{@volumePoints}"
+    "Type: #{@type} File: #{@file} start_point: #{@start_point} end_point: #{@end_point} Mute: #{@mute} Volume: #{@volume_points}"
   end
   
 end

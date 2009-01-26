@@ -17,20 +17,20 @@ class SequencedBuilder < BasicBuilder
     
   end
   
-  def buildMovie(xml, movie)
+  def build_movie(xml, movie)
     #Parse a visual sequence from xml
-    visualSequence = VisualSequence.new
+    visual_sequence = VisualSequence.new
     XPath.each(xml, "/movie/sequence/visual"){ |visual| 
-      visualSequence.addVideo(readVisual(visual)) 
+      visual_sequence.addVideo(read_visual(visual))
     }
-    movie.visualSequence = visualSequence
+    movie.visual_sequence = visual_sequence
     
     #Parse audio sequence from xml
-    audioSequence = AudioSequence.new
+    audio_sequence = AudioSequence.new
     XPath.each(xml, "/movie/sequence/audio"){ |audio| 
-      audioSequence.addAudio(readAudio(audio))      
+      audio_sequence.add_audio(read_audio(audio))
     }
-    movie.audioSequence = audioSequence #Add the parsed audiosequence to movie
+    movie.audio_sequence = audio_sequence #Add the parsed audiosequence to movie
     
     return movie
   end

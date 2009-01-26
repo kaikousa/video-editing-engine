@@ -12,7 +12,7 @@ class AudioSequence
     @sorted = false
   end
   
-  def addAudio(audio)
+  def add_audio(audio)
     @audios << audio
     @sorted = false
   end

@@ -10,7 +10,7 @@ class AudioTools
     @settings = VREConfig.instance.settings
   end
   
-  def convertAudio(audio, project)
+  def convert_audio(audio, project)
     #Convert from original format to .wav
     #Update file-property in the audio
     filename = (File.basename(audio.file)).split(".")[0] + "_converted.wav"
@@ -21,37 +21,37 @@ class AudioTools
     audio.file = project.converted + "/#{filename}"
   end
   
-  def trimAudio(audio, project)
+  def trim_audio(audio, project)
     filename = project.converted + "/" + (File.basename(audio.file)).split(".")[0] + "_channel.ewf"
     
     ewf = "source = #{audio.file}\n"
     ewf << "offset = #{audio.place.seconds.to_f}\n"
-    ewf << "start-position = #{audio.startPoint.seconds.to_f}\n"
-    ewf << "length = #{audio.lengthInSeconds.to_f}\n"
+    ewf << "start-position = #{audio.start_point.seconds.to_f}\n"
+    ewf << "length = #{audio.length_in_seconds.to_f}\n"
     f = File.new(filename, 'w')
     f.write(ewf)
     f.close
-    audio.ewfFile = filename
+    audio.ewf_file = filename
   end
   
-  def mixAudioSequence(sequence, project)
+  def mix_audio_sequence(sequence, project)
     audios = sequence.audios
     unless(audios.length == 0)
-      ecaCmd = "ecasound -b:256 "
+      eca_cmd = "ecasound -b:256 "
       0.upto(audios.length - 1){|i|
-        ecaCmd << " -a:#{i + 1} -i #{audios[i].ewfFile}"
+        eca_cmd << " -a:#{i + 1} -i #{audios[i].ewf_file}"
       }
     
-      audiotrackFilename = project.final + "/audiotrack.wav"
+      audiotrack_filename = project.final + "/audiotrack.wav"
     
-      ecaCmd << " -a:all -o #{audiotrackFilename} 1>/dev/null 2>&1"
+      eca_cmd << " -a:all -o #{audiotrack_filename} 1>/dev/null 2>&1"
       #puts ecaCmd
-      system(ecaCmd)
+      system(eca_cmd)
     else
-      audiotrackFilename = VREConfig.instance.vreRoot + "resources/silencio.wav"
+      audiotrack_filename = VREConfig.instance.vre_root + "resources/silencio.wav"
     end
     
-    return audiotrackFilename
+    return audiotrack_filename
   end
   
 end

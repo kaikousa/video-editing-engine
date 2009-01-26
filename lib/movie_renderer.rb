@@ -10,63 +10,63 @@ include Observable
 
 class MovieRenderer
   
-  def initialize(videoTool = VideoTools.new, audioTool = AudioTools.new)
-    @videoTool = videoTool
-    @audioTool = audioTool
+  def initialize(video_tool = VideoTools.new, audio_tool = AudioTools.new)
+    @video_tool = video_tool
+    @audio_tool = audio_tool
   end
   
   def render(movie)
-    updateAll("MovieRenderer", "Processing audio...")
-    audioFile = processAudio(movie)
-    updateAll("MovieRenderer", "...audioprocessing finished!")
+    update_all("MovieRenderer", "Processing audio...")
+    audio_file = process_audio(movie)
+    update_all("MovieRenderer", "...audioprocessing finished!")
     
-    updateAll("MovieRenderer", "Processing effects...")
-    processEffects(movie)
-    updateAll("MovieRenderer", "...effects finished!")
+    update_all("MovieRenderer", "Processing effects...")
+    process_effects(movie)
+    update_all("MovieRenderer", "...effects finished!")
     
-    updateAll("MovieRenderer", "Processing visuals...")
-    videoFile = processVisuals(movie)
-    updateAll("MovieRenderer", "...videoprocessing finished!")
+    update_all("MovieRenderer", "Processing visuals...")
+    video_file = process_visuals(movie)
+    update_all("MovieRenderer", "...videoprocessing finished!")
     
-    updateAll("MovieRenderer", "Multiplexing audio and video...")
-    @videoTool.multiplex(movie, videoFile, audioFile)
-    updateAll("MovieRenderer", "...multiplexing finished")
+    update_all("MovieRenderer", "Multiplexing audio and video...")
+    @video_tool.multiplex(movie, video_file, audio_file)
+    update_all("MovieRenderer", "...multiplexing finished")
     
-    updateAll("MovieRenderer", "Rendering finished!")
+    update_all("MovieRenderer", "Rendering finished!")
   end
   
   #Convert -> Trim -> Combine -> Result: Audiotrack
-  def processAudio(movie)
-    audios = movie.audioSequence.sort
+  def process_audio(movie)
+    audios = movie.audio_sequence.sort
     audios.each{|audio|
-      @audioTool.convertAudio(audio, movie.project)
-      @audioTool.trimAudio(audio, movie.project)
+      @audio_tool.convert_audio(audio, movie.project)
+      @audio_tool.trim_audio(audio, movie.project)
     }
-    audioSequence = AudioSequence.new
-    audioSequence.audios = audios
-    movie.audioSequence = audioSequence
-    @audioTool.mixAudioSequence(audioSequence, movie.project)
+    audio_sequence = AudioSequence.new
+    audio_sequence.audios = audios
+    movie.audio_sequence = audio_sequence
+    @audio_tool.mix_audio_sequence(audio_sequence, movie.project)
   end
   
   #Trim/generate -> Combine -> Result: Videotrack
-  def processVisuals(movie)
-    visuals = movie.visualSequence.sort
+  def process_visuals(movie)
+    visuals = movie.visual_sequence.sort
     visuals.each {|visual|
       if(visual.type == "video")
-        @videoTool.trimVideo(movie, visual)
+        @video_tool.trim_video(movie, visual)
       elsif(visual.type == "image")
-        @videoTool.createVideoFromImage(movie, visual)
+        @video_tool.create_video_from_image(movie, visual)
       elsif(visual.type == "blackness")
-        @videoTool.createBlackVideo(movie, visual)
+        @video_tool.create_black_video(movie, visual)
       end
     }
     sequence = VisualSequence.new
     sequence.visuals = visuals
-    movie.visualSequence = sequence
-    @videoTool.combineVideo(movie)
+    movie.visual_sequence = sequence
+    @videoTool.combine_video(movie)
   end
   
-  def processEffects(movie)
+  def process_effects(movie)
     
   end
   

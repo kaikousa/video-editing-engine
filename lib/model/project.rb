@@ -6,18 +6,18 @@ class Project
     
     attr_reader :root, :converted, :final, :originals, :name, :trimmed
     
-    def initialize(projectName)
+    def initialize(project_name)
       #Convert the project's name more file system friendly
-      projectName = projectName.gsub(" ", "_")#Remove whitespaces
-      projectName = projectName.gsub(",", "")#Remove commas
-      @name = projectName
+      project_name = project_name.gsub(" ", "_")#Remove whitespaces
+      project_name = project_name.gsub(",", "")#Remove commas
+      @name = project_name
     end
     
-    def setProjectFolders(projectRoot)
-      @root = projectRoot
-      @converted = projectRoot + "/converted"
-      @final = projectRoot + "/final"
-      @originals = projectRoot + "/originals"
-      @trimmed = projectRoot + "/trimmed"
+    def set_project_folders(project_root)
+      @root = project_root
+      @converted = project_root + "/converted"
+      @final = project_root + "/final"
+      @originals = project_root + "/originals"
+      @trimmed = project_root + "/trimmed"
     end
 end

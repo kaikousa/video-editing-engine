@@ -13,16 +13,16 @@ class Vre
     
   end
   
-  def processXml(xmlFile)
+  def process_xml(xmlFile)
     builder = MovieBuilder.new
     builder.register(self)
     movie = builder.buildMovie(xmlFile)
-    processMovie(movie)
+    process_movie(movie)
   end
   
-  def processMovie(movie)
-    folderManager = FolderManager.new
-    folderManager.createProjectLayout(movie.project)
+  def process_movie(movie)
+    folder_manager = FolderManager.new
+    folder_manager.createProjectLayout(movie.project)
     puts "Created folders for the project in workspace: #{movie.project.root}"
     normalizer = MovieNormalizer.new
     normalizer.register(self)
@@ -56,8 +56,8 @@ end
 puts "\nVideo Rendering Engine (v.0.1-alpha)"
 puts ""
 
-xmlFile = ARGV[0]
-if(xmlFile == nil)
+xml_file = ARGV[0]
+if(xml_File == nil)
   puts "Parameter missing!"
   puts "USAGE: ruby vre <xmlfile>"
   puts ""
@@ -65,7 +65,7 @@ else
   start = Time.now
 
   vre = Vre.new()
-  vre.processXml(xmlFile)
+  vre.process_xml(xml_file)
 
   stop = Time.now
   puts "It took #{stop - start} seconds to finish"

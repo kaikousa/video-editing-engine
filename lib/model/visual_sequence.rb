@@ -12,7 +12,7 @@ class VisualSequence
     @sorted = false
   end
   
-  def addVideo(visual)
+  def add_video(visual)
     @visuals << visual
     @sorted = false
   end

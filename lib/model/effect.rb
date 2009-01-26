@@ -6,12 +6,12 @@ require "model/time_code"
 
 class Effect
   
-  attr_reader(:name, :properties, :endPoint, :startPoint)
+  attr_reader(:name, :properties, :end_point, :start_point)
   
-  def initialize(name, startPoint, endPoint, properties)
+  def initialize(name, start_point, end_point, properties)
     @name = name
-    @startPoint = TimeCode.new(startPoint)
-    @endPoint = TimeCode.new(endPoint)
+    @start_point = TimeCode.new(start_point)
+    @end_point = TimeCode.new(end_point)
     @properties = properties
   end
   

@@ -55,7 +55,4 @@ class MovieBuilder
     return @movie
   end
   
-  def build_from_xml(xml_file)
-  end
-  
 end

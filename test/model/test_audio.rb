@@ -6,7 +6,7 @@ require 'test/unit'
 
 class TestAudio < Test::Unit::TestCase
   
-  def testAudio
+  def test_audio
     audio = Audio.new("", "00:00:00:00", "00:00:00:00", "00:00:00:00", [])
   end
   

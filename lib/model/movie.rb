@@ -8,42 +8,42 @@ require 'model/project'
 
 class Movie
   
-  attr_reader(:name, :format, :resolution, :audioSequence, :visualSequence, :effects, :project, :width, :height)
+  attr_reader(:name, :format, :resolution, :audio_sequence, :visual_sequence, :effects, :project, :width, :height)
   
   def initialize(name, format, resolution)
     @name = name
     @format = format
     @resolution = resolution
-    @audioSequence = AudioSequence.new
-    @visualSequence = VisualSequence.new
+    @audio_sequence = AudioSequence.new
+    @visual_sequence = VisualSequence.new
     @effects = []
     @project = Project.new(@name)
-    setWidthAndHeight(@resolution)
+    set_width_and_height(@resolution)
   end
   
-  def visualSequence=(visualSequence)
-    @visualSequence = visualSequence
+  def visual_sequence=(visual_sequence)
+    @visual_sequence = visual_sequence
   end
   
-  def audioSequence=(audioSequence)
-    @audioSequence = audioSequence
+  def audio_sequence=(audio_sequence)
+    @audio_sequence = audio_sequence
   end
   
   def effects=(effects)
     @effects = effects
   end
   
-  def audioLongerThanVideo?()
-    sortedVisuals = @visualSequence.sort
-    sortedAudios = @audioSequence.sort
+  def audio_longer_than_video?()
+    sorted_visuals = @visual_sequence.sort
+    sorted_audios = @audio_sequence.sort
     
-    if sortedAudios.length == 0 or sortedVisuals.length == 0
+    if sorted_audios.length == 0 or sorted_visuals.length == 0
       return false
     end
     
-    lastAudio = sortedAudios[sortedAudios.length - 1]
-    lastVisual = sortedVisuals[sortedVisuals.length - 1]
-    if (lastAudio.place.milliseconds + lastAudio.length) > (lastVisual.place.milliseconds + lastVisual.length)
+    last_audio = sorted_audios[sorted_audios.length - 1]
+    last_visual = sorted_visuals[sorted_visuals.length - 1]
+    if (last_audio.place.milliseconds + last_audio.length) > (last_visual.place.milliseconds + last_visual.length)
       return true
     else
       return false
@@ -54,10 +54,10 @@ class Movie
     "\nName: #{@name}\nFormat: #{@format}\nResolution: #{@resolution}\n\n"
   end
   
-  def setWidthAndHeight(resolution)
-      widthAndHeight = resolution.split('x')
-      @width = widthAndHeight[0]
-      @height = widthAndHeight[1]
+  def set_width_and_height(resolution)
+      width_and_height = resolution.split('x')
+      @width = width_and_height[0]
+      @height = width_and_height[1]
   end
-  private :setWidthAndHeight
+  private :set_width_and_height
 end

@@ -5,21 +5,21 @@ require "model/time_code"
 
 class Audio
   
-  attr_reader(:file, :startPoint, :endPoint, :place, :volumePoints, :ewfFile)
+  attr_reader(:file, :start_point, :end_point, :place, :volume_points, :ewf_file)
   
-  def initialize(file, startPoint, endPoint, place, volumePoints)
+  def initialize(file, start_point, end_point, place, volume_points)
     @file = file
-    @startPoint = TimeCode.new(startPoint)
-    @endPoint = TimeCode.new(endPoint)
+    @start_point = TimeCode.new(start_point)
+    @end_point = TimeCode.new(end_point)
     @place = TimeCode.new(place)
-    @volumePoints = volumePoints
-    unless @volumePoints == nil
-        @volumePoints = []
+    @volume_points = volume_points
+    unless @volume_points == nil
+        @volume_points = []
     end
     
-    unless @volumePoints.length == 0
-        @volumePoints << VolumePoint.new(100, 0)
-        @volumePoints << VolumePoint.new(100, self.length)
+    unless @volume_points.length == 0
+        @volume_points << VolumePoint.new(100, 0)
+        @volume_points << VolumePoint.new(100, self.length)
     end
   end
   
@@ -27,37 +27,37 @@ class Audio
     @file = file
   end
   
-  def startPoint=(point)
-    @startPoint = point
+  def start_point=(point)
+    @start_point = point
   end
   
-  def endPoint=(point)
-    @endPoint = point
+  def end_point=(point)
+    @end_point = point
   end
   
   def place=(point)
     @place = point
   end
   
-  def volumePoints=(points)
-    @volumePoints = points
+  def volume_points=(points)
+    @volume_points = points
   end
   
-  def ewfFile=(ewf)
-    @ewfFile = ewf
+  def ewf_file=(ewf)
+    @ewf_file = ewf
   end
   
-  #Returns the length of the clip (endpoint - startpoint)
+  #Returns the length of the clip (end_point - start_point)
   def length()
-    return (@endPoint.milliseconds - @startPoint.milliseconds)
+    return (@end_point.milliseconds - @start_point.milliseconds)
   end
   
-  def lengthInSeconds()
-    return (@endPoint.seconds - @startPoint.seconds)
+  def length_in_seconds()
+    return (@end_point.seconds - @start_point.seconds)
   end
   
   def to_str()
-    "File: #{@file} StartPoint: #{@startPoint} EndPoint: #{@endPoint} Volume: #{@volume} Place: #{@place}"
+    "File: #{@file} start_point: #{@start_point} end_point: #{@end_point} Volume: #{@volume} Place: #{@place}"
   end
   
 end
