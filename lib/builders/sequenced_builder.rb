@@ -21,7 +21,7 @@ class SequencedBuilder < BasicBuilder
     #Parse a visual sequence from xml
     visual_sequence = VisualSequence.new
     XPath.each(xml, "/movie/sequence/visual"){ |visual| 
-      visual_sequence.addVideo(read_visual(visual))
+      visual_sequence.add_video(read_visual(visual))
     }
     movie.visual_sequence = visual_sequence
     
