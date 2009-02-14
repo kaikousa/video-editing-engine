@@ -111,7 +111,7 @@ class MovieNormalizer
     gap = Visual.new("blackness", "nil", gap_start, gap_end, gap_place, true, [], [])
     sorted_visuals << gap
     
-    movie.visualSequence.visuals = sorted_visuals
+    movie.visual_sequence.visuals = sorted_visuals
   end
   
   def view_visuals(visuals)
