@@ -111,8 +111,9 @@ class VideoTools
     cmd.sub!('<source>', trimmed_visuals)
     cmd.sub!('<target>', video_file)
     puts "Combining videos"
+    #puts cmd
     system(cmd)
-    return videoFile
+    return video_file
   end
   
   #Combine video- and audiotracks to one videofile

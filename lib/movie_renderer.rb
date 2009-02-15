@@ -63,7 +63,7 @@ class MovieRenderer
     sequence = VisualSequence.new
     sequence.visuals = visuals
     movie.visual_sequence = sequence
-    @videoTool.combine_video(movie)
+    @video_tool.combine_video(movie)
   end
   
   def process_effects(movie)

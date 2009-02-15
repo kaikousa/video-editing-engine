@@ -43,9 +43,9 @@ class Vee
     
     puts "\nProceeding to rendering process..."
     
-    #renderer = MovieRenderer.new
-    #renderer.register(self)
-    #renderer.render(movie)
+    renderer = MovieRenderer.new
+    renderer.register(self)
+    renderer.render(movie)
   end
   
   def update(sender, message)
