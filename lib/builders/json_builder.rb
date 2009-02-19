@@ -16,7 +16,11 @@ class JSONBuilder
     data_str = ""
     data.each{|line| data_str += line}
     data.close()
-    project_data = JSON.parse(data_str)
+    return build_movie_from_str(data_str)
+  end
+  
+  def build_movie_from_str(json_str)
+    project_data = JSON.parse(json_str)
     name = project_data["movie"]["name"]
     format = project_data["movie"]["format"]
     resolution = project_data["movie"]["resolution"]
